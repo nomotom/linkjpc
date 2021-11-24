@@ -399,7 +399,7 @@ def reg_mention_gold_distance(mention_gold_link_dist_file, opt_info, diff_info_f
     Returns:
         diff_info (dict)
     Output:
-        mention_gold_link_dist_info_file
+        mention_gold_link_dist_info_file: summary of gold links of mentions by category * attribute
     Note:
         mention_gold_link_dist_file
             The distance between mention and nearest gold link (backward/forward) in sample data.

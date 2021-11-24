@@ -259,7 +259,7 @@ class DataInfo(object):
     f_html_info_default = 'html_tag_info.tsv'
     #
     # (3) entity linking
-    # (2-1) common_data_dir
+    # (3-1) common_data_dir
     #
     # [CL1]
     f_mention_gold_link_dist_info_default = 'mention_gold_link_dist_info.tsv'
