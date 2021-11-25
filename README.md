@@ -1,13 +1,13 @@
 # linkjpc
 
 TABLE OF CONTENTS:
-- [INTRODUCTION](#INTRODUCTION)
-- [MODULE CONFIGURATION](#MODULECONFIGURATION)
-- [DATA FILES](#DATAFILES)
-- [STEPS TO TRY ENTITY LINKING](#STEPSTOTRYENTITYLINKING)
-- [MODULE CONFIGURATION](#MODULECONFIGURATION)
-- [NOTES ON PREPROCESSING](#NOTESONPREPROCESSING)
-- [UNSOLVED ISSUES](#UNSOLVEDISSUES)
+- [INTRODUCTION](#introduction)
+- [MODULE CONFIGURATION](#module-configuration)
+- [DATA FILES](#data-files)
+- [STEPS TO TRY ENTITY LINKING](#steps-to-try-entity-linking)
+- [MODULE CONFIGURATION](#module-configuration)
+- [NOTES ON PREPROCESSING](#notes-on-preprocessing)
+- [UNSOLVED ISSUES](#unsolved-issues)
 
 ## INTRODUCTION
 
@@ -29,7 +29,7 @@ example |original page (entity) | attribute name|mention / attribute value | pag
 (b) |[ヴェネツィア(Venice)](https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A7%E3%83%8D%E3%83%84%E3%82%A3%E3%82%A2) | 別名(alias) | アドリア海の女王(Queen of the Adriatic) |[ヴェネツィア(Venice)](https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A7%E3%83%8D%E3%83%84%E3%82%A3%E3%82%A2)
 (c) |[ヴェネツィア(Venice)](https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A7%E3%83%8D%E3%83%84%E3%82%A3%E3%82%A2) | 特産品(local speciality) | ヴェネツィアン・グラス(Venetian glass) |[ヴェネツィアン・グラス(Venetian glass)](https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A7%E3%83%8D%E3%83%84%E3%82%A3%E3%82%A2%E3%83%B3%E3%83%BB%E3%82%B0%E3%83%A9%E3%82%B9)
 
-*1: The target pages are given as html files based on Wikipedia dump (Jan 21, 2019). See **_[data info](data_info.md)_**  ([IT2](#data_info.md#IT2))  for details.
+*1: The target pages are given as html files based on Wikipedia dump (Jan 21, 2019). See **_[data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md)_**  for details.
 
 ### Primary features 
 
@@ -70,15 +70,15 @@ and/or backlinks.
 
 -----------------
 ## DATA FILES
-As for the data files used for entity linking (**_linkjpc_**) or preprocessing (**_linkjpc_prep_**), see _**[data_info](data_info.md)**_.
+As for the data files used for entity linking (**_linkjpc_**) or preprocessing (**_linkjpc_prep_**), see _**[data_info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#data-description)**_.
 
 ## STEPS TO TRY ENTITY LINKING
 
 1) Download the scripts and data files. 
-   - The data files required for entity linking and preprocessing are listed in **[WHERE TO GET DATA](data_info.md#WHERETOGETDATA)** in **_[data info](data_info.md)_**.  
-   - (optional) If you would like to try preprocessing (**_linkjpc_prep_**) by yourself, please refer to **[Notes on Preprocessing](#NOTESONPREPROCESSING)** below as well.
+   - The data files required for entity linking and preprocessing are listed in **[WHERE TO GET DATA](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#data-description#where-to-get-data)** in **_[data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#data-description)_**.  
+   - (optional) If you would like to try preprocessing (**_linkjpc_prep_**) by yourself, please refer to **[Notes on Preprocessing](#notes-on-preprocessing)** below as well.
 
-2) Place the files in the directories as specified in **[WHERE TO PUT DATA](data_info.md#WHERETOPUTDATA)** in **_[data info](data_info.md)_**.  
+2) Place the files in the directories as specified in **[WHERE TO PUT DATA](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#where-to-put-data)** in **_[data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md)_**.  
 
 3) Try entity linking (**_linkjpc_**) referring to sample scripts (eg. _linkjpc_test.sh_) in  **_tests_** folder.
 
