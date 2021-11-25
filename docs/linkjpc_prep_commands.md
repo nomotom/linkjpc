@@ -1,5 +1,10 @@
 ## LINKJPC_PRE_COMMANDS
 
+TABLE OF CONTENTS
+
+- [ARGUMENTS](#arguments)
+- [OPTIONS](#options)
+
 ### ARGUMENTS
 
 argument |description | type |  note

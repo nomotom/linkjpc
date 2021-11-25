@@ -1,10 +1,10 @@
 ## LINKJPC_COMMANDS
 
 TABLE OF CONTENTS:
-- ARGUMENTS
-- OPTIONS
-  - OPTIONS FOR MAIN MODULES
-  - OPTIONS FOR FILTERING 
+- [ARGUMENTS](#arguments)
+- [OPTIONS](#options)
+  - [OPTIONS FOR MAIN MODULES](#options-for-main-modules)
+  - [OPTIONS FOR FILTERING](#options-for-filtering) 
 
 ### ARGUMENTS
 

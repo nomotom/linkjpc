@@ -7,7 +7,7 @@
 - [エンティティリンキングを試してみる](#エンティティリンキングを試してみる)
 - [前処理に関する注意](#前処理に関する注意)
 - [今後の課題](#今後の課題)
-- 
+
 ## はじめに
 
 **_linkjpc_** は [SHINRA2021-LinkJP](http://shinra-project.info/shinra2021linkjp/) (task1)という日本語Wikipediaのエンティティリンキングタスク用に開発したツールです。
@@ -27,7 +27,7 @@ SHINRA2021-LinkJPはWikipedia記事中の、あるエンティティ(事物)を�
 (c) |[ヴェネツィア](https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A7%E3%83%8D%E3%83%84%E3%82%A3%E3%82%A2) | 特産品 | ヴェネツィアン・グラス |[ヴェネツィアン・グラス](https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A7%E3%83%8D%E3%83%84%E3%82%A3%E3%82%A2%E3%83%B3%E3%83%BB%E3%82%B0%E3%83%A9%E3%82%B9)
 
 *1: リンク先のターゲットページはWikipediaダンプ(2019年1月21日版)のhtmlファイルとして与えられます (Jan 21, 2019)。
-詳細は [data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#) の[IT2](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#IT2) をご覧ください。
+詳細は [data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#)  をご覧ください。
 
 ### 主な特徴 
 
@@ -74,11 +74,11 @@ SHINRA2021-LinkJPはWikipedia記事中の、あるエンティティ(事物)を�
 ## エンティティリンキングを試してみる
 
 1) スクリプトデータファイルをダウンロード 
-   - エンティティリンキング (**_linkjpc_**)と前処理（**_linkjpc_prep_**: オプショナル）に必要なデータファイルのリストは[data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md)　の[WHERE TO GET DATA](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#WHERETOGETDATA) をご覧ください。 
+   - エンティティリンキング (**_linkjpc_**)と前処理（**_linkjpc_prep_**: オプショナル）に必要なデータファイルのリストは[data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md)　の[WHERE TO GET DATA](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#where-to-get-data) をご覧ください。 
    - 前処理（オプショナル）を試す場合は、以下の[前処理に関する注意](#前処理に関する注意) もご覧ください。
 
 2) ファイルを配置
-   - [data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md) の**[WHERE TO PUT DATA](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#WHERETOPUTDATA)** で指定されたディレクトリに配置してください。
+   - [data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md) の[WHERE TO PUT DATA](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#where-to-put-data) で指定されたディレクトリに配置してください。
 
 3) エンティティリンキングを実行  
 　　- **_tests_** ディレクトリのスクリプト例 ( _linkjpc_test.sh_) を参考にしてください。
