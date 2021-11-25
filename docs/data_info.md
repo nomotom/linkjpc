@@ -9,11 +9,11 @@ TABLE OF CONTENTS:
 
 Where to get data depends on the data creation method as shown below.
 
-Data creation method | Data ID            | Where to get data 
-:-------------------------------------|:----------------|:-----------------------------------------
-(1) [project SHINRA data distribution](#1-project-shinra-data-distribution) | [IT1](#IT1-test-data), [[IT2(#IT2)],[[IT3(#IT3)], [[IT4](#IT4)], <br> [CD1](#CD1)], [CD2(#CD2)], [CD3(#CD3)],|project SHINRA site <br>- [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) <br> - [SHINRA Data Dowload](http://shinra-project.info/download/) <br><br>(Please access to each page linked in **_[DATA DESCRIPTION](#DATADESCRIPTION)_** below.)
-(2) [manually created data](#2-manually-created-data)|[CM*](#CM1)] | [public data (rule-based systems)](https://drive.google.com/drive/folders/1rNlUanyl1ULEUUKMifIMZgwhzs-84iQT?usp=sharing) |
-(3) [Data created by preprocessing tools](#3-data-created-by-preprocessing-tools) |[[CP*](#CP1)], [TP*](#TP1)] | [public data (rule-based systems)](https://drive.google.com/drive/folders/1rNlUanyl1ULEUUKMifIMZgwhzs-84iQT?usp=sharing) |
+Data creation method | data necessay for entity linking (_linkjpc_)          | additional data necessary for preprocessing (optional) |Where to get data 
+:-------------------------------------|:---------|:-------|:-----------------------------------------
+(1) [project SHINRA data distribution](#1-project-shinra-data-distribution) | [IT1](#it1-test-data)| [IT2](#it2-original-articles-of-test-data-html), [IT3](#it3-sample-gold-data), [IT4](#it4-original-articles-of-sample-data-html), <br> [CD1](#cd1-f_cirrus_content_default), [CD2](#cd2-f_title2pid_org_default), [CD3](#CD3-f_enew_org_default)|project SHINRA site <br>- [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) <br> - [SHINRA Data Dowload](http://shinra-project.info/download/) <br><br>(Please access to each page linked in **_[DATA DESCRIPTION](#DATADESCRIPTION)_** below.)
+(2) [manually created data](#2-manually-created-data)|[CM4-6](#cm4-)|[CM1-3](#cm1-f_disambiguation_pat_default)| [public data (rule-based systems)](https://drive.google.com/drive/folders/1rNlUanyl1ULEUUKMifIMZgwhzs-84iQT?usp=sharing) 
+(3) [Data created by preprocessing tools](#3-data-created-by-preprocessing-tools) |[CP8-10](#CP8-new-f_title2pid_ext_default),<BR> [TP2-TP7](#tp2-f_back_link_default) |[CP1-7](#cp1-sample-gold-data-info),<BR> [TP1](#tp1-f_input_title_default) |   the same as (2) above 
 
 See **_[DATA DESCRIPTION](#data-description)_** for details about files and download pages.  
 
@@ -34,7 +34,7 @@ The directories are specified as command line arguments or options when you try 
     
 ## **in_dir** (linkjpc, linkjpc_prep)
 
-  Please create the directories and place the test data ([IT1](#IT1)) (*.json) and html files ([IT2(#IT2)) as follows.  
+  Please create the directories and place the test data ([IT1](#it1-test-data)) (*.json) and html files ([IT2](#it2-original-articles-of-test-data-html)) as follows.  
   - The name of the bottom directory to place test data should be '**ene_annotation**'.
   - Do not place other json files (eg. '*_for_view.json') in the same directory. 
   - Html files should be grouped by categories and be placed in subdirectories under '**html**' respectively.
@@ -72,37 +72,37 @@ The directories are specified as command line arguments or options when you try 
 ### **common_data_dir** (linkjpc, linkjpc_prep)
 
 (entity linking)
->- att_def.tsv (CM3(#CM3))
->- wl_lines_backward_ca.tsv (CM4](#CM4)) 
->- wl_lines_forward_ca.tsv (CM5(#CM5)) 
->- ENEW_ENEtag_20200427_mod.tsv ([CP5(#CP5))
->- jawiki-20190120-title2pageid_ext.tsv ([CP6](#CP6))
->- common_html_tag_info.tsv ([CP7(#CP7))
->- mention_gold_link_dist.tsv ([CP8(#CP8))
->- sample_cat_att_mention_linkcand.tsv ([CP9(#CP9))
->- cat_att_selflink.tsv ([CP10(#CP10))
+>- wl_lines_backward_ca.tsv ([CM4](#cm4-f_wl_lines_backward_ca_default))
+>- wl_lines_forward_ca.tsv ([CM5](#cm5-f_wl_lines_forward_ca_default)) 
+>- att_def.tsv ([CM6](#CM6-f_attr_rng_default))
+>- ENEW_ENEtag_20200427_mod.tsv ([CP5](#cp5-f_enew_info_default))
+>- mention_gold_link_dist.tsv ([CP6](#cp6-f_mention_gold_link_dist_default))
+>- common_html_tag_info.tsv ([CP7](#cp7-f_common_html_info_default))
+>- jawiki-20190120-title2pageid_ext.tsv ([CP8](#cp8-f_title2pid_ext_default))
+>- sample_cat_att_mention_linkcand.tsv ([CP9](#cp9-f_link_prob_default))
+>- cat_att_selflink.tsv ([CP10](#cp10-f_slink_default))
 
 (preprocessing)
-> - jawiki-20190121-cirrussearch-content.json.gz (CD1](#CD1)) 
-> - jawiki-20190120-title2pageid.json (CD2(#CD2)) 
-> - ENEW_ENEtag_20200427.json (CD3(#CD3)) 
-> - jawiki-20190121-cirrussearch-content_wikipat_dis.tsv (CM1](#CM1)) 
-> - ENEW_ENEtag_20200427_stoplist.tsv (CM2(#CM2)) 
-> - jawiki-20190120-pagelinks_dmp.tsv (CM6](#CM6)) 
+> - jawiki-20190121-cirrussearch-content.json.gz ([CD1](#cd1-f_cirrus_content_default)) 
+> - jawiki-20190120-title2pageid.json ([CD2](#cd2-f_title2pid_org_default)) 
+> - ENEW_ENEtag_20200427.json ([CD3](#cd3-f_enew_org_default))
+> - jawiki-20190121-cirrussearch-content_wikipat_dis.tsv ([CM1](#cm1-f_disambiguation_pat_default)) 
+> - ENEW_ENEtag_20200427_stoplist.tsv ([CM2](#cm2-f_enew_mod_list_default)) 
+> - jawiki-20190120-pagelinks_dmp.tsv ([CM3](#CM3-f_back_link_dump_default)) 
 
 ### **tmp_data_dir**  (linkjpc, linkjpc_prep)
 (entity linking)
->- input_title.txt (TP1](#TP1))
->- back_link_full.tsv (TP2(#TP2))
->- mint_partial_match.tsv (TP3(#TP3))
->- mint_trim_partial_match.tsv (TP4](#TP4))
->- tinm_partial_match.tsv (TP5(#TP5))
->- tinm_trim_partial_match.tsv (TP6](#TP6))
->- html_tag_info.tsv (TP7(#TP7))
+- input_title.txt ([TP1](#tp1-f_input_title_default))
+- back_link_full.tsv ([TP2](#tp2-f_back_link_default))
+- mint_partial_match.tsv ([TP3](#tp3-f_mint_partial_default))
+- mint_trim_partial_match.tsv ([TP4](#tp4-f_mint_trim_partial_default))
+- tinm_partial_match.tsv ([TP5](#tp5-f_tinm_partial_default))
+- tinm_trim_partial_match.tsv ([TP6](#tp6-f_tinm_trim_partial_default))
+- html_tag_info.tsv ([TP7](#tp7-f_html_info_default))
 
 ### **sample_gold_dir**  (linkjpc_prep)
 
-  In case of preprocessing, create the following directories (bold fonts) and place the sample gold data (*.json, [IT3(#IT3)) and html files ([IT4](#IT4)).  
+  In case of preprocessing, create the following directories (bold fonts) and place the sample gold data (*.json, [IT3](#it3-sample-gold-data)) and html files ([IT4](#it4-original-articles-of-sample-data-html)).  
   The name of the bottom directory of sample gold data should be '**link_annotation**'.  
   Html files should be placed in subdirectories corresponding their category directory under '**html**', respectively.  
 
@@ -133,7 +133,7 @@ The directories are specified as command line arguments or options when you try 
      + Person
        + *.html (IT4)
   ```
-  *1: [CP1](#[CP1) files (*.tsv) are also created in the same directory in preprocessing.
+  *1: [CP1](#cp1-sample-gold-data-info) files (*.tsv) are also created in the same directory in preprocessing.
 
 # DATA DESCRIPTION
 
@@ -197,7 +197,7 @@ Download the data listed below from _URL(to be prepared)_ .
 ### CM1 (f_disambiguation_pat_default)
  - filename: '**jawiki-20190121-cirrussearch-content_wikipat_dis.tsv**'
  - created by: manually
- - used in: (linkjpc_prep) gen_disambiuation_file
+ - used in: (linkjpc_prep) gen_disambiguation_file
 
 ### CM2 (f_enew_mod_list_default)
  - filename: '**ENEW_ENEtag_20200427_stoplist.tsv**'
@@ -207,17 +207,17 @@ Download the data listed below from _URL(to be prepared)_ .
  - created by: manually
  - used in: (linkjpc_prep) gen_enew_info_file
 
-### CM3 (f_attr_rng_default)
- - filename: '**att_def.tsv**'
- - format: ene_label_en, attribute_name, range, probability (*.tsv)
-   - (range):    'ene':eneid
- - sample:
-   - `Person  国籍  ene:1.5.1.3   1.0`
-   - `Person 国籍　ene:1.5.1.0   0.5`
- - created by: manually
- - used in: (linkjpc)get_attr_range
-
-### CM4] (f_wl_lines_backward_ca_default)
+### CM3 (f_back_link_dump_default) 
+ - filename: '**jawiki-20190120-pagelinks_dmp.tsv**'
+ - format: back link pid, org_title (*.tsv)
+ notice: based on jawiki-20190120-pagelinks.sql
+ - based on: jawiki-20190120-pagelinks.sql
+   - The original sql file is available from: project SHINRA data distribution, [SHINRA2021-LinkJP](http://shinra-project.info/shinra2021linkjp/) (リンク先のWikipediaデータ(WikiDump)))
+ - created by: 
+ ```mysql -u root -D pagelink < jawiki-20190120-pagelinks.sql```
+ - used in: (linkjpc_prep) gen_back_link_info_file
+ 
+### CM4 (f_wl_lines_backward_ca_default)
  - filename: '**wl_lines_backward_ca.tsv**'
  - notice: 
    - The default file contains just one example and should be modified. 
@@ -237,15 +237,16 @@ Download the data listed below from _URL(to be prepared)_ .
    - `Person  作品    1`
  - used in: (linkjpc) gw.reg_mention_gold_distance_ca
 
-### CM6] (f_back_link_dump_default) 
- - filename: '**jawiki-20190120-pagelinks_dmp.tsv**'
- - format: back link pid, org_title (*.tsv)
- notice: based on jawiki-20190120-pagelinks.sql
- - based on: jawiki-20190120-pagelinks.sql
-   - The original sql file is available from: project SHINRA data distribution, [SHINRA2021-LinkJP](http://shinra-project.info/shinra2021linkjp/) (リンク先のWikipediaデータ(WikiDump)))
- - created by: 
- ```mysql -u root -D pagelink < jawiki-20190120-pagelinks.sql```
- - used in: (linkjpc_prep) gen_back_link_info_file
+### CM6 (f_attr_rng_default)
+ - filename: '**att_def.tsv**'
+ - format: ene_label_en, attribute_name, range, probability (*.tsv)
+   - (range):    'ene':eneid
+ - sample:
+   - `Person  国籍  ene:1.5.1.3   1.0`
+   - `Person 国籍　ene:1.5.1.0   0.5`
+ - created by: manually
+ - used in: (linkjpc)get_attr_range
+
 
 ## (3) data created by preprocessing tools
 ## (3-1) (common_data_dir)
@@ -301,8 +302,29 @@ Download the data listed below from _URL(to be prepared)_ .
     - Not all target pageids are included in the file. (eg. 3682608, 3386984)
  - created by: (linkjpc_prep --gen_title2pid) gen_enew_info_file
  - used in: (linkjpc_prep) gen_title2pid_ext_file
+ 
+### CP6 (f_mention_gold_link_dist_default) 
+ - filename: '**mention_gold_link_dist.tsv**'
+ - description: Mention goldlink dist file, which shows the distance (number of lines) between mentions and (nearest) gold links in sample html files.
+ - format: ene_label_en, attribute_name, distance (.tsv)
+ - sample: 
+   - `Person 作品 -1`
+   - `Person 作品 29`
+ - notice: the values are based on sample data
+ - created by: (linkjpc_prep --gen_link_dist) gen_mention_gold_link_dist
+ - used in: (linkjpc_prep --gen_link_dist) gen_mention_gold_link_dist_info
 
-### CP6 (f_title2pid_ext_default) 
+### CP7 (f_common_html_info_default) 
+ - filename: '**common_html_tag_info.tsv**'
+ - description: Info on embedded links to other Wikipedia pages in original articles of sample data
+ - format: 
+   - cat, pid, line_id, text_start, text_end, text, title (*.tsv)
+ - sample: 
+   - `City    1617736 90      292     298     リンブルフ州 リンブルフ州 (ベルギー)`
+ - created by: gen_html_info_file
+ - used in: (linkjpc_prep) gen_mention_gold_link_dist
+
+### CP8 (f_title2pid_ext_default) 
  - filename: '**jawiki-20190120-title2pageid_ext.tsv**'
  - description: Summary information on title to pageid conversion, incoming links, and ENE classification of articles. .
  - format: 
@@ -316,26 +338,6 @@ Download the data listed below from _URL(to be prepared)_ .
     prematching_mention_title (reg_pid2title), 
     gen_self_link_info (get_category)
    (linkjpc) ljc_main, lc.reg_title2pid_ext
-
-### CP7 (f_common_html_info_default) 
- - filename: '**common_html_tag_info.tsv**'
- - format: 
-   - cat, pid, line_id, text_start, text_end, text, title (*.tsv)
- - sample: 
-   - `City    1617736 90      292     298     リンブルフ州 リンブルフ州 (ベルギー)`
- - created by: gen_html_info_file
- - used in: (linkjpc_prep) gen_mention_gold_link_dist
-
-### CP8 (f_mention_gold_link_dist_default) 
- - filename: '**mention_gold_link_dist.tsv**'
- - description: Mention goldlink dist file, which shows the distance (number of lines) between mentions and (nearest) gold links in sample html files.
- - format: ene_label_en, attribute_name, distance (.tsv)
- - sample: 
-   - `Person 作品 -1`
-   - `Person 作品 29`
- - notice: the values are based on sample data
- - created by: (linkjpc_prep --gen_link_dist) gen_mention_gold_link_dist
- - used in: (linkjpc_prep --gen_link_dist) gen_mention_gold_link_dist_info
  
 ### CP9 (f_link_prob_default) 
  - filename: '**sample_cat_att_mention_linkcand.tsv**'
@@ -351,17 +353,16 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### CP10 (f_slink_default) 
  - filename: '**cat_att_selflink.tsv**'
- - description: Self link info file
+ - description: Self link info file to estimate the probability of linking to the original article for each category-attribute pair. 
  - format: ene_label_en, attribute_name, ratio (*.tsv)
  - sample:
    - `Person  家族    0.0`
    - `Person  別名    1.0`
- - notice: 
-   - The ratio is based on sample data (ver.20210428).
+ - note: The ratio is based on SHINRA2021-LinkJP sample data (ver.20210428).
  - created by: (linkjpc_prep --gen_slink) gen_self_link_info
  - used in: (linkjpc) sl.check_slink_info
 
-##(3-2) (tmp_data_dir)
+## (3-2) (tmp_data_dir)
 
 ### TP1 (f_input_title_default)
  - filename: '**input_title.txt**'
@@ -432,7 +433,7 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### TP7 (f_html_info_default)  
  - filename: '**html_tag_info.tsv**'
- - description: Info on links to other Wikipedia pages in original articles
+ - description: Info on embedded links to other Wikipedia pages in original articles of test data
  - format: 
    - cat, pid, line_id, text_start, text_end, text, title (.tsv)
  - sample: 
@@ -440,15 +441,15 @@ Download the data listed below from _URL(to be prepared)_ .
  - created by: (linkjpc_prep --gen_html) gen_html_info_file
  - used by: (linkjpc) gw.reg_tag_info
  
-##(3) data created by entity linking
-###(3-1) (out_dir)
+## (3) data created by entity linking
+### (3-1) (out_dir)
 
 ### OL1 (output data)
  - filename: **Airport.json, City.json, Company.json, Compound.json, Conference.json, Lake.json, Person.json**
  - description: output data 
  - format: [SHINRA2021-LinkJP data format](http://shinra-project.info/shinra2021linkjp/#data-format)
 
-###(3-2) (common_data_dir)
+### (3-2) (common_data_dir)
 
 ### CL1 (f_mention_gold_link_dist_info_default) 
  - filename: '**mention_gold_link_dist_info.tsv**'

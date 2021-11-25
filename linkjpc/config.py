@@ -194,7 +194,7 @@ class DataInfo(object):
     f_enew_mod_list_default = 'ENEW_ENEtag_20200427_stoplist.tsv'
     #
     # [CM3]
-    f_attr_rng_default = 'att_def.tsv'
+    f_back_link_dump_default = 'jawiki-20190120-pagelinks_dmp.tsv'
     #
     # [CM4]
     f_wl_lines_backward_ca_default = 'wl_lines_backward_ca.tsv'
@@ -203,7 +203,7 @@ class DataInfo(object):
     f_wl_lines_forward_ca_default = 'wl_lines_forward_ca.tsv'
     #
     # [CM6]
-    f_back_link_dump_default = 'jawiki-20190120-pagelinks_dmp.tsv'
+    f_attr_rng_default = 'att_def.tsv'
     #
     # (2) preprocessing
     # (2-1) common_data_dir
@@ -222,13 +222,13 @@ class DataInfo(object):
     f_enew_info_default = 'ENEW_ENEtag_20200427_mod.tsv'
     #
     # [CP6]
-    f_title2pid_ext_default = 'jawiki-20190120-title2pageid_ext.tsv'
+    f_mention_gold_link_dist_default = 'mention_gold_link_dist.tsv'
     #
     # [CP7]
     f_common_html_info_default = 'common_html_tag_info.tsv'
     #
     # [CP8]
-    f_mention_gold_link_dist_default = 'mention_gold_link_dist.tsv'
+    f_title2pid_ext_default = 'jawiki-20190120-title2pageid_ext.tsv'
     #
     # [CP9]
     f_link_prob_default = 'sample_cat_att_mention_linkcand.tsv'
