@@ -141,27 +141,27 @@ The directories are specified as command line arguments or options when you try 
 ## (1-1) test data and html files (in_dir)
 ### IT1 (test data)
 - filename: Airport.json, City.json, Company.json, Compound.json, Conference.json, Lake.json, Person.json
-- description: test data
-- available from: [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) 公開コード/データ ([評価データ: 入力ファイル、対象のWikipediaページ](https://drive.google.com/file/d/1iEciat50vSaGJ9d9FQz20k8eRt2mMGN7/view?usp=sharing)) 
+- description: Test data.
+- available from: [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) 公開データ/コード ([評価データ: 入力ファイル、対象のWikipediaページ](https://drive.google.com/file/d/1iEciat50vSaGJ9d9FQz20k8eRt2mMGN7/view?usp=sharing)) 
 - used in: (linkjpc) linkjpc, (linkjpc_prep) linkjpc_prep
 
 ### IT2 (original articles of test data (*.html))
 - filename: *.html
 - description: *.html files of the original articles of test data. The files are grouped by ENE categories (eg. Airport, City, etc.)
-- available from: [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) 公開コード/データ ([評価データ: 入力ファイル、対象のWikipediaページ](https://drive.google.com/file/d/1iEciat50vSaGJ9d9FQz20k8eRt2mMGN7/view?usp=sharing))
+- available from: [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) 公開データ/コード ([評価データ: 入力ファイル、対象のWikipediaページ](https://drive.google.com/file/d/1iEciat50vSaGJ9d9FQz20k8eRt2mMGN7/view?usp=sharing))
 - used in: (linkjpc_prep)gen_html_info_file
 
 ## (1-2) (sample data and html files (sample_gold_dir)
 ### IT3 (sample gold data)
 - filename: Airport.json, City.json, Company.json, Compound.json, Conference.json, Lake.json, Person.json
-- description: sample gold data
-- available from: [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) 公開コード/データ ([サンプルデータ](https://drive.google.com/file/d/1b9Xm-Qd1sVfmDr8o4y3t-dVnGai15P-q/view?usp=sharing)) 
+- description: Sample gold data.
+- available from: [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) 公開データ/コード ([サンプルデータ](https://drive.google.com/file/d/1b9Xm-Qd1sVfmDr8o4y3t-dVnGai15P-q/view?usp=sharing)) 
 - used in: (linkjpc_prep)gen_link_prob_file
 
 ### IT4 (original articles of sample data (*.html))
 - filename: ***.html**
 - description: *.html files of the original articles of sample data. The files are grouped by ENE categories (eg. Airport, City, etc.)
-- available from: [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) 公開コード/データ ([サンプルデータ](https://drive.google.com/file/d/1b9Xm-Qd1sVfmDr8o4y3t-dVnGai15P-q/view?usp=sharing)) 
+- available from: [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) 公開データ/コード ([サンプルデータ](https://drive.google.com/file/d/1b9Xm-Qd1sVfmDr8o4y3t-dVnGai15P-q/view?usp=sharing)) 
 - used in: (linkjpc_prep)gen_html_info_file
 
 ## (1-3) other task data (common_data_dir)
@@ -169,13 +169,13 @@ The directories are specified as command line arguments or options when you try 
 ### CD1 (f_cirrus_content_default) 
  - filename: '**jawiki-20190121-cirrussearch-content.json.gz**'
  - description: Wikipedia Cirrus Dump (content)
- - available from: [SHINRA2021-LinkJP](https://drive.google.com/drive/folders/1emH81ac0e1kYKAF4mvpCslRAgBKCN_Ah?usp=sharing) 公開コード/データ([リンク先のWikipediaデータ](https://drive.google.com/drive/folders/1emH81ac0e1kYKAF4mvpCslRAgBKCN_Ah?usp=sharing) (CirrussearchDump))
+ - available from: [SHINRA2021-LinkJP](https://drive.google.com/drive/folders/1emH81ac0e1kYKAF4mvpCslRAgBKCN_Ah?usp=sharing) 公開データ/コード([リンク先のWikipediaデータ](https://drive.google.com/drive/folders/1emH81ac0e1kYKAF4mvpCslRAgBKCN_Ah?usp=sharing) (CirrussearchDump))
  - used in: (linkjpc_prep) gen_disambiuation_file
 
 ### CD2 (f_title2pid_org_default)
  - filename: '**jawiki-20190120-title2pageid.json**'
  - description: Title to pageid conversion info list
- - available from: [SHINRA2021-LinkJP](https://drive.google.com/drive/folders/1emH81ac0e1kYKAF4mvpCslRAgBKCN_Ah?usp=sharing) 公開コード/データ([リンク先のWikipediaデータ](https://drive.google.com/drive/folders/1emH81ac0e1kYKAF4mvpCslRAgBKCN_Ah?usp=sharing) (各種処理済データ)
+ - available from: [SHINRA2021-LinkJP](https://drive.google.com/drive/folders/1emH81ac0e1kYKAF4mvpCslRAgBKCN_Ah?usp=sharing) 公開データ/コード([リンク先のWikipediaデータ](https://drive.google.com/drive/folders/1emH81ac0e1kYKAF4mvpCslRAgBKCN_Ah?usp=sharing) (各種処理済データ)
  - sample: 
    - `{"page_id": 302067, "title": "イギリス語", "is_redirect": true,
  "redirect_to": {"page_id": 3377, "title": "英語", "is_redirect": false}}`
@@ -184,6 +184,7 @@ The directories are specified as command line arguments or options when you try 
 
 ### CD3 (f_enew_org_default)  
  - filename: '**ENEW_ENEtag_20210427.json**'
+ - description: Original ENEW info (ENE Classification of Japanese Wikipedia pages).
  - available from:  [SHINRA Data Download](http://shinra-project.info/download/?lang=en) (ENE + Wikipedia DATA)  
  - notice: You need an account to get the data. Please create your SHINRA account at [SHINRA: Sign in](http://shinra-project.info/signin) page.
  - distributed by: project SHINRA
@@ -196,11 +197,16 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### CM1 (f_disambiguation_pat_default)
  - filename: '**jawiki-20190121-cirrussearch-content_wikipat_dis.tsv**'
+ - description: Disambiguation page judgment rules list.
+ - format: target, position, expression (*.tsv)
+ - sample:
+   - cat     end     曖昧さ回避 
  - created by: manually
  - used in: (linkjpc_prep) gen_disambiguation_file
 
 ### CM2 (f_enew_mod_list_default)
  - filename: '**ENEW_ENEtag_20200427_stoplist.tsv**'
+ - description: ENEW modification list 
  - format: ENEID, pid, title (*.tsv)
  - sample: 
    - `1.5.1.3 1419479 フランス陸軍参謀総長`
@@ -209,16 +215,17 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### CM3 (f_back_link_dump_default) 
  - filename: '**jawiki-20190120-pagelinks_dmp.tsv**'
+ - description: Back link dump file converted from jawiki-20190120-pagelinks.sql.
  - format: back link pid, org_title (*.tsv)
- notice: based on jawiki-20190120-pagelinks.sql
- - based on: jawiki-20190120-pagelinks.sql
-   - The original sql file is available from: project SHINRA data distribution, [SHINRA2021-LinkJP](http://shinra-project.info/shinra2021linkjp/) (リンク先のWikipediaデータ(WikiDump)))
+ notice: 
+ - The original sql file is available from: project SHINRA data distribution, [SHINRA2021-LinkJP](http://shinra-project.info/shinra2021linkjp/) (公開データ/コード,  [リンク先のWikipediaデータ(WikiDump)](https://drive.google.com/drive/folders/1emH81ac0e1kYKAF4mvpCslRAgBKCN_Ah?usp=sharing)))
  - created by: 
  ```mysql -u root -D pagelink < jawiki-20190120-pagelinks.sql```
  - used in: (linkjpc_prep) gen_back_link_info_file
  
 ### CM4 (f_wl_lines_backward_ca_default)
  - filename: '**wl_lines_backward_ca.tsv**'
+ - description: The file to specify maximum number of line to backward-search Wikipedia links in the page for each category-attribute pair.
  - notice: 
    - The default file contains just one example and should be modified. 
  - format:
@@ -229,6 +236,7 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### CM5 (f_wl_lines_forward_ca_default)
  - filename: '**wl_lines_forward_ca.tsv**'
+ - description: The file to specify maximum number of line to forward-search Wikipedia links in the page for each category-attribute pair.
  - notice: 
    - The default file contains just one example and should be modified.  
  - format:
@@ -253,7 +261,7 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### CP1 (sample gold data info)
  - filename: **Airport.tsv, City.tsv, Company.tsv, Compound.tsv, Conference.tsv, Lake.tsv, Person.tsv** 
- - description: sample gold data info
+ - description: Sample gold data info.
  - format: org_pageid, org_title, attribute_name, mention, start_line_id, start_offset, end_line_id, end_offset, gold_pageid, gold_title (*.tsv)
  - sample: 573393  森見登美彦      生誕地  日本・奈良県生駒市      35      33      35      42      22003   生駒市
  - created by: (linkjpc_prep --gen_sample_gold_tsv) linkedjson2tsv
@@ -261,6 +269,7 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### CP2 (f_disambiguation_default)
  - filename: '**jawiki-20190121-cirrussearch-content_disambiguation.tsv**'
+ - description: Disambiguation page list.
  - sample: 
    - `1128763 テトラ (曖昧さ回避)`
    - `3077413	ハムレット (曖昧さ回避)`
@@ -269,6 +278,7 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### CP3 (f_redirect_info_default) 
  - filename: '**jawiki-20190120-title2pageid_nodis.tsv**'
+ - description: Redirect info file, a modification of original from_title to_pageid information file to exclude disambiguation pages and ill-formatted pages. 
  - format: title, pageid (*.tsv)
  - sample: 
    - `1904年アメリカ合衆国大統領選挙  1477879`
@@ -282,6 +292,9 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### CP4 (f_incoming_default) 
  - filename: '**jawiki-20190121-cirrussearch-content_incoming_link.tsv**'
+ - description: Incoming link info list.
+ - format:
+   - pageid, title, number of incoming links (*.tsv) 
  - sample: 
    - `311957	風と共に去りぬ (宝塚歌劇)	1091`
    - `345792  ピノッキオの冒険        233`
@@ -366,13 +379,15 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### TP1 (f_input_title_default)
  - filename: '**input_title.txt**'
- - description: title list of test data
+ - description: Title list of test data.
+ - format:
+   - title (*.txt) 
  - created by: (linkjpc_prep --gen_back_link) extract_input_title
  - used in: (linkjpc_prep) gen_back_link_info_file
  
 ### TP2 (f_back_link_default) 
  - filename: '**back_link_full.tsv**'
- - description: back link info file, which shows the title pages of test data and the back links to the pages
+ - description: Back link info file, which shows the title pages of test data and the back links to the pages
  - format: org_title, back link pid, back link title (*.tsv)
  - sample: 
    - `1975年度新人選手選択会議 (日本プロ野球)	143952	中畑清`
@@ -383,7 +398,7 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### TP3 (f_mint_partial_default) 
  - filename: '**mint_partial_match.tsv**'
- - description: mention-title matching ratio list (mention in title, full title)
+ - description: Mention-title matching ratio list (mention in title, full title)
  - format: mention, pid, title, ratio (*.tsv)
  - sample:
    - `風と共に去りぬ	457696	風と共に去りぬ	1.0`
@@ -394,7 +409,7 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### TP4 (f_mint_trim_partial_default) 
  - filename: '**mint_trim_partial_match.tsv**'
- - description: mention-title matching ratio list (mention in title, trimmed title)
+ - description: Mention-title matching ratio list (mention in title, trimmed title)
  - notice:
    - Disambiguation descriptions enclosed in braces in titles are not used for matching.
  - format: See f_mint_partial_default
@@ -407,7 +422,7 @@ Download the data listed below from _URL(to be prepared)_ .
  
 ### TP5 (f_tinm_partial_default) 
  - filename: '**tinm_partial_match.tsv**'
- - description: mention-title matching ratio list (title in mention, full title)
+ - description: Mention-title matching ratio list (title in mention, full title)
  - format: mention, pid, title, ratio (*.tsv)
  - sample:
    - `風と共に去りぬ	457696	風と共に去りぬ	1.0`
@@ -417,7 +432,7 @@ Download the data listed below from _URL(to be prepared)_ .
  
 ### TP6 (f_tinm_trim_partial_default) 
  - filename: '**tinm_trim_partial_match.tsv**'
- - description: mention-title matching ratio list (title in mention, tinm title)
+ - description: Mention-title matching ratio list (title in mention, tinm title)
  - notice:
    - Disambiguation descriptions enclosed in braces in titles are not used for matching
  - format: 
@@ -446,14 +461,14 @@ Download the data listed below from _URL(to be prepared)_ .
 
 ### OL1 (output data)
  - filename: **Airport.json, City.json, Company.json, Compound.json, Conference.json, Lake.json, Person.json**
- - description: output data 
+ - description: Output data.
  - format: [SHINRA2021-LinkJP data format](http://shinra-project.info/shinra2021linkjp/#data-format)
 
 ### (3-2) (common_data_dir)
 
 ### CL1 (f_mention_gold_link_dist_info_default) 
  - filename: '**mention_gold_link_dist_info.tsv**'
- - description: summary of gold links of mentions by category * attribute
+ - description: Summary of gold links of mentions by category * attribute.
  - format: 
    - cat, attr, backward_limit, forward_limit, diff_backward_num, diff_forward_num, diff_same_num, all_num (tsv)
  - sample:
