@@ -10,8 +10,12 @@ import sys
 
 
 def set_logging_pre(log_info, logger_name):
+    from os import path
+
     logging_ini = log_info.logging_ini
-    logging.config.fileConfig(logging_ini)
+    log_file_path = path.join(path.dirname(path.abspath(__file__)), logging_ini)
+    logging.config.fileConfig(log_file_path)
+
     logger = logging.getLogger(logger_name)
     return logger
 

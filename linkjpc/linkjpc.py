@@ -21,8 +21,12 @@ import logging.config
 
 
 def set_logging(log_info, logger_name):
+    from os import path
+
     logging_ini = log_info.logging_ini
-    logging.config.fileConfig(logging_ini)
+    log_file_path = path.join(path.dirname(path.abspath(__file__)), logging_ini)
+    logging.config.fileConfig(log_file_path)
+
     logger = logging.getLogger(logger_name)
     return logger
 
@@ -487,8 +491,7 @@ def ljc_main(common_data_dir,
     d_self_link = {}
     d_link_prob = {}
     d_back_link = {}
-    # test
-    # diff_info = {}
+    diff_info = {}
 
     # mint
     if (opt_info.mention_in_title == 'e' or opt_info.mention_in_title == 'p') and 'm' not in opt_info.mod:
@@ -841,13 +844,13 @@ def ljc_main(common_data_dir,
 
             for i_line in i:
                 rec = json.loads(i_line)
-                check_t = 0
-                check_m = 0
-                check_s = 0
-                check_l = 0
-                check_w = 0
-                check_i = 0
-                check_a = 0
+                # check_t = 0
+                # check_m = 0
+                # check_s = 0
+                # check_l = 0
+                # check_w = 0
+                # check_i = 0
+                # check_a = 0
 
                 link_info = cf.LinkInfo('linfo')
 
@@ -906,7 +909,7 @@ def ljc_main(common_data_dir,
                         # filtered candidates
                         if w_tmp_cand_list:
                             cl.append_filtering_cand_info(w_tmp_cand_list, link_info, log_info)
-                            check_w = 1
+                            # check_w = 1
 
                 # slink
                 if 's' in opt_info.mod:
@@ -944,7 +947,7 @@ def ljc_main(common_data_dir,
                         # filtered candidates
                         if s_tmp_cand_list:
                             cl.append_filtering_cand_info(s_tmp_cand_list, link_info, log_info)
-                            check_s = 1
+                            # check_s = 1
                 # mint
                 if 'm' in opt_info.mod:
                     m_tmp_cand_list = []
@@ -980,7 +983,7 @@ def ljc_main(common_data_dir,
                         # filtered candidates
                         if m_tmp_cand_list:
                             cl.append_filtering_cand_info(m_tmp_cand_list, link_info, log_info)
-                            check_m = 1
+                            # check_m = 1
 
                 # tinm
                 if 't' in opt_info.mod:
@@ -1019,7 +1022,7 @@ def ljc_main(common_data_dir,
                         # filtered candidates
                         if t_tmp_cand_list:
                             cl.append_filtering_cand_info(t_tmp_cand_list, link_info, log_info)
-                            check_t = 1
+                            # check_t = 1
                 # link prob
                 if 'l' in opt_info.mod:
                     l_tmp_cand_list = []
@@ -1056,7 +1059,7 @@ def ljc_main(common_data_dir,
                         # filtered candidates
                         if l_tmp_cand_list:
                             cl.append_filtering_cand_info(l_tmp_cand_list, link_info, log_info)
-                            check_l = 1
+                            # check_l = 1
 
                 # scoring link candidates for tmp mention
                 final_cand_list = gs.scoring(opt_info, link_info, mention_info, mod_info, log_info)
