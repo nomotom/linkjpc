@@ -78,7 +78,7 @@ and/or backlinks.
 The following procedure explains the steps of entity linking. 
 
 1) Download the scripts and data files. 
-   - The data files required for entity linking and preprocessing (optional) are listed in **[WHERE TO GET DATA](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#data-description#where-to-get-data)** in **_[data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#data-description)_**.  
+   - The data files required for entity linking and preprocessing (optional) are listed in **[WHERE TO GET DATA](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#where-to-get-data)** in **_[data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#data-description)_**.  
    - (optional) If you would like to try preprocessing (**_linkjpc_prep_**) by yourself, please refer to **[Notes on Preprocessing](#notes-on-preprocessing)** below as well.
 
 2) Place the files in the directories as specified in **[WHERE TO PUT DATA](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#where-to-put-data)** in **_[data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md)_**.  
