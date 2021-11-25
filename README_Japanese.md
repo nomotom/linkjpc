@@ -8,7 +8,7 @@
 - [NOTES ON PREPROCESSING](#NOTESONPREPROCESSING)(前処理(オプショナル)に関する注意)
 - [UNSOLVED ISSUES](#UNSOLVEDISSUES)(課題)
 - [テスト2](#テスト2)
-- [テスト](#https://github.com/nomotom/linkjpc/blob/master/README_Japanese.md#%E3%83%86%E3%82%B9%E3%83%88)
+- [テスト](https://github.com/nomotom/linkjpc/blob/master/README_Japanese.md#%E3%83%86%E3%82%B9%E3%83%88)
 
 
 ## Introduction
