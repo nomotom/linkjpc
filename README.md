@@ -104,6 +104,7 @@ Please keep the following points in mind.
 By default, the output files of preprocessing will be output to either of the following directories, overwriting existing files.
 - (a) common_data_directory
 - (b) tmp_data_directory
+- (c) sample_gold_direcory
 
 To avoid that, please save the existing files to different directories beforehand or specify other directories as (a)(b) using entity linking (**_linkjpc_**) options.
 

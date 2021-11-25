@@ -100,9 +100,10 @@ $ python ./linkjpc/linkjpc.py (common_data_dir) (tmp_data_dir) (in_dir) (out_dir
 
 ### 出力ディレクトリ
 
-前処理の出力ファイルは以下のいずれかに出力され、既存のファイルを上書きします。
+前処理の出力ファイルは以下のいずれかに出力され、既存の同名ファイルを上書きします。
 - (a) common_data_directory
 - (b) tmp_data_directory
+- (c) sample_gold_directory
 
 上記を避けたい場合は、必ず元のファイルを別の場所に保存するか、コマンドラインオプションで (a)(b)として別のディレクトリを指定してください。
 
