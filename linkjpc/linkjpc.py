@@ -156,12 +156,12 @@ def set_logging(log_info, logger_name):
                    'specified by wl_lines_forward_ca_ratio, fr: both f and r (f takes precedence), n: N/A')
 @click.option('--f_wl_lines_backward_ca', '-f_wl_bca', type=click.STRING,
               default=cf.DataInfo.f_wl_lines_backward_ca_default, show_default=True,
-              help='the files to specify maximum number of line to backward-search Wikipedia links in the page for '
-                   'each category-attribute pairs. Notice: The default file can be empty.')
+              help='the file to specify maximum number of line to backward-search Wikipedia links in the page for '
+                   'each category-attribute pairs. Notice: The default file contains just one example.')
 @click.option('--f_wl_lines_forward_ca', '-f_wl_fca', type=click.STRING,
               default=cf.DataInfo.f_wl_lines_forward_ca_default, show_default=True,
-              help='the files to specify maximum number of line to forward-search Wikipedia links in the page for each '
-                   'category-attribute pairs. Notice: The default file can be empty.')
+              help='the file to specify maximum number of line to forward-search Wikipedia links in the page for each '
+                   'category-attribute pairs. Notice: The default file contains just one example.')
 @click.option('--wl_lines_backward_ca_ratio', '-wl_bca_ratio', type=click.FLOAT,
               default=cf.OptInfo.wl_lines_backward_ca_ratio_default, show_default=True,
               help='maximum ratio of lines to backward-search wikipedia links in the page; the number of candidate'

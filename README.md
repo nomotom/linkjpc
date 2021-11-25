@@ -2,20 +2,23 @@
 
 TABLE OF CONTENTS:
 - [INTRODUCTION](#introduction)
-- [MODULE CONFIGURATION](#module-configuration)
-- [DATA FILES](#data-files)
-- [STEPS TO TRY ENTITY LINKING](#steps-to-try-entity-linking)
-- [MODULE CONFIGURATION](#module-configuration)
+  - [TASK](#task)
+  - [PRIMARY FEATURES](#primary-features) 
+- [MODULE](#modules)
+- [TRY ENTITY LINKING](#try-entity-linking)
 - [NOTES ON PREPROCESSING](#notes-on-preprocessing)
 - [UNSOLVED ISSUES](#unsolved-issues)
+- [FURTHER READINGS](#further-readings)
+  - [DATA FILES](#data-files)
+  - [COMMANDLINE OPTIONS](#commandline-options)
 
 ## INTRODUCTION
 
-**_linkjpc_** is an entity linking tool designed for a Japanese Wikipedia entity linking task called [SHINRA2021-LinkJP](http://shinra-project.info/shinra2021linkjp/) (task1).
+**_linkjpc_** is a set of python modules designed for a Japanese Wikipedia entity linking task called [SHINRA2021-LinkJP](http://shinra-project.info/shinra2021linkjp/) (task1).
 
 ### Task
 
-The task is to link given mentions (eg. _イタリア(Italy)_) in Wikipedia articles to the relevant Wikipedia pages (eg. [イタリア(Italy)](https://ja.wikipedia.org/wiki/%E3%82%A4%E3%82%BF%E3%83%AA%E3%82%A2)) to which they refer, and can be regarded as a kind of Wikification. 
+The task is to link given mentions (eg. _イタリア(Italy)_) in Wikipedia articles to their corresponding Wikipedia pages (eg. [イタリア(Italy)](https://ja.wikipedia.org/wiki/%E3%82%A4%E3%82%BF%E3%83%AA%E3%82%A2)) to which they refer, and can be regarded as a kind of Wikification. 
 
 In this task, mentions are marked as values of _attributes_ (eg. country, alias, local speciality) of the topical _entities_ (eg. Venice) of the Wikipedia articles on which they appear. 
 
@@ -33,14 +36,14 @@ example |original page (entity) | attribute name|mention / attribute value | pag
 
 ### Primary features 
 
-**_linkjpc_** is composed of five main modules, each can be combined with up to three types of filtering modules (called 'filtering' hereafter).  
-Primary features of the system include:
-- Main modules cover string matching (between mentions and page titles), finding embedded links to the referred page, self-link estimation, link probability estimation based on statistics.
-- Filtering using attribute range (rule-based class estimation of candidate link pages), number of incoming links,
+**_linkjpc_** have the following key features. 
+
+- Allows combination of main modules to utilize string matching (between mentions and page titles), finding embedded links to the referred page, self-link estimation, link probability estimation based on statistics.
+- Each module can be combined with up to three types of filtering modules (called 'filtering' hereafter), which use attribute range (rule-based class estimation of candidate link pages), number of incoming links,
 and/or backlinks.
 - Do without machine learning (but with heavy preprocessing).
 
-## MODULE CONFIGURATION
+## MODULES
 ### Entity linking
 #### core
 - **linkjpc.py(ljc)**
@@ -59,7 +62,7 @@ and/or backlinks.
 - **incl_filtering.py(il)** (filtering by number of incoming links)
 - **back_link.py(bl)** (filtering by backlinks)
 
-####others
+#### others
 - **config.py(cf)** (definition of classes, etc.)
 - **compile_list.py(cl)** (compiling candidate link pages from main modules to build final candidate list)
 - **get_score.py(gs)** (scoring of final candidate link pages)
@@ -69,19 +72,25 @@ and/or backlinks.
 - **linkjpc_prep.py**
 
 -----------------
-## DATA FILES
-As for the data files used for entity linking (**_linkjpc_**) or preprocessing (**_linkjpc_prep_**), see _**[data_info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#data-description)**_.
 
-## STEPS TO TRY ENTITY LINKING
+## TRY ENTITY LINKING
+
+The following procedure explains the steps of entity linking. 
 
 1) Download the scripts and data files. 
-   - The data files required for entity linking and preprocessing are listed in **[WHERE TO GET DATA](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#data-description#where-to-get-data)** in **_[data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#data-description)_**.  
+   - The data files required for entity linking and preprocessing (optional) are listed in **[WHERE TO GET DATA](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#data-description#where-to-get-data)** in **_[data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#data-description)_**.  
    - (optional) If you would like to try preprocessing (**_linkjpc_prep_**) by yourself, please refer to **[Notes on Preprocessing](#notes-on-preprocessing)** below as well.
 
 2) Place the files in the directories as specified in **[WHERE TO PUT DATA](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#where-to-put-data)** in **_[data info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md)_**.  
 
-3) Try entity linking (**_linkjpc_**) referring to sample scripts (eg. _linkjpc_test.sh_) in  **_tests_** folder.
+3) Try entity linking (**_linkjpc_**). 
 
+```
+[example] linking mentions to Wikipedia pages with the same name (exact match)
+$ python ./linkjpc/linkjpc.py (common_data_dir) (tmp_data_dir) (in_dir) (out_dir) --mod m --mint e
+
+```
+  For further examples, please refer to sample scripts (eg. _linkjpc_test.sh_) in  **_tests_** folder.
 
 ## NOTES ON PREPROCESSING
 
@@ -125,3 +134,12 @@ python: 3.8
 - Machine learning + Hyper parameter tuning
 - Development data
   - Currently, the statistics used by some modules are based on the small sample data.
+
+## FURTHER READINGS
+### DATA FILES
+  - As for the data files used for entity linking (**_linkjpc_**) and/or preprocessing (**_linkjpc_prep_**), see _**[data_info](https://github.com/nomotom/linkjpc/blob/master/docs/data_info.md#data-description)**_.
+
+### COMMANDLINE OPTIONS
+  - entity linking (_linkjpc_):  [linkjpc_commands](https://github.com/nomotom/linkjpc/blob/master/docs/linkjpc_commands)
+  - preprocessing (_linkjpc_prep_):  [linkjpc_prep_commands](https://github.com/nomotom/linkjpc/blob/master/docs/linkjpc_prep_commands)
+ 

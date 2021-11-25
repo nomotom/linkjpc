@@ -990,13 +990,14 @@ def gen_self_link_info(gold_dir, self_link_info_file, log_info):
             for grow in greader:
                 gold_key = '\t'.join(grow[0:8])
                 if not check_gold.get(gold_key):
-                    check_gold[gold_key] = 0
-                check_gold[gold_key] += 1
+                    check_gold[gold_key] = 1
 
+                # self-link
                 if check_self(grow, log_info):
                     if not check_self_gold.get(gold_key):
-                        check_self_gold[gold_key] = 0
-                    check_self_gold[gold_key] += 1
+                        check_self_gold[gold_key] = 1
+                    else:
+                        check_self_gold[gold_key] += 1
 
         for common_key in check_gold:
             common_key_list = re.split('\t', common_key)

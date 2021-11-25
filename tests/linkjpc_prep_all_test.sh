@@ -4,7 +4,7 @@
 
 ## !! PLEASE MODIFY THE DIRECTORIES BELOW !!
 script="./linkjpc/linkjpc_prep.py"
-base_dir="/XXX/XXX/2021-LinkJP/"
+base_dir="/XXXX/XXXX/2021-LinkJP/"
 base_data_dir="${base_dir}Download/"
 common_data_dir="${base_data_dir}ljc_data/common/"
 tmp_data_dir="${base_data_dir}ljc_data/test/"

@@ -206,8 +206,13 @@ class DataInfo(object):
     f_attr_rng_default = 'att_def.tsv'
     #
     # (2) preprocessing
-    # (2-1) common_data_dir
-    # [CP1] (sample gold data info)
+    # (2-1) sample_gold_data_dir
+    # [SP1] (sample gold data info)
+    #
+    # (2-2) common_data_dir
+    #
+    # [CP1]
+    f_common_html_info_default = 'common_html_tag_info.tsv'
     #
     # [CP2]
     f_disambiguation_default = 'jawiki-20190121-cirrussearch-content_disambiguation.tsv'
@@ -225,7 +230,7 @@ class DataInfo(object):
     f_mention_gold_link_dist_default = 'mention_gold_link_dist.tsv'
     #
     # [CP7]
-    f_common_html_info_default = 'common_html_tag_info.tsv'
+    f_slink_default = 'cat_att_selflink.tsv'
     #
     # [CP8]
     f_title2pid_ext_default = 'jawiki-20190120-title2pageid_ext.tsv'
@@ -233,10 +238,7 @@ class DataInfo(object):
     # [CP9]
     f_link_prob_default = 'sample_cat_att_mention_linkcand.tsv'
     #
-    # [CP10]
-    f_slink_default = 'cat_att_selflink.tsv'
-    #
-    # (2-2) tmp_data_dir
+    # (2-3) tmp_data_dir
     # [TP1]
     f_input_title_default = 'input_title.txt'
     #

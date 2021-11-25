@@ -13,12 +13,12 @@ Data creation method | data necessay for entity linking (_linkjpc_)          | a
 :-------------------------------------|:---------|:-------|:-----------------------------------------
 (1) [project SHINRA data distribution](#1-project-shinra-data-distribution) | [IT1](#it1-test-data)| [IT2](#it2-original-articles-of-test-data-html), [IT3](#it3-sample-gold-data), [IT4](#it4-original-articles-of-sample-data-html), <br> [CD1](#cd1-f_cirrus_content_default), [CD2](#cd2-f_title2pid_org_default), [CD3](#CD3-f_enew_org_default)|project SHINRA site <br>- [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) <br> - [SHINRA Data Dowload](http://shinra-project.info/download/) <br><br>(Please access to each page linked in **_[DATA DESCRIPTION](#DATADESCRIPTION)_** below.)
 (2) [manually created data](#2-manually-created-data)|[CM4-6](#cm4-)|[CM1-3](#cm1-f_disambiguation_pat_default)| [public data (rule-based systems)](https://drive.google.com/drive/folders/1rNlUanyl1ULEUUKMifIMZgwhzs-84iQT?usp=sharing) 
-(3) [Data created by preprocessing tools](#3-data-created-by-preprocessing-tools) |[CP8-10](#CP8-new-f_title2pid_ext_default),<BR> [TP2-TP7](#tp2-f_back_link_default) |[CP1-7](#cp1-sample-gold-data-info),<BR> [TP1](#tp1-f_input_title_default) |   the same as (2) above 
+(3) [Data created by preprocessing tools](#3-data-created-by-preprocessing-tools) |[CP7-9](#cp7-f_slink_default),<BR> [TP2-TP7](#tp2-f_back_link_default) |  |   the same as (2) above 
 
 See **_[DATA DESCRIPTION](#data-description)_** for details about files and download pages.  
 
-Please place the downloaded files to the directories specified in **[WHERE TO PUT DATA](#where-to-put-data)**. As for (2) and (3) above, the data 
-files are grouped and stored in three folders on the download site, namely, **tmp_data_dir**, **sample_gold_dir**, and 
+Please place the downloaded files to the directories specified in **[WHERE TO PUT DATA](#where-to-put-data)**.  
+As for (2) and (3) above, the data files are grouped and stored in three folders on the download site, namely, **tmp_data_dir**, **sample_gold_dir**, and 
 **common_data_dir**.
 
 # WHERE TO PUT DATA  
@@ -75,12 +75,10 @@ The directories are specified as command line arguments or options when you try 
 >- wl_lines_backward_ca.tsv ([CM4](#cm4-f_wl_lines_backward_ca_default))
 >- wl_lines_forward_ca.tsv ([CM5](#cm5-f_wl_lines_forward_ca_default)) 
 >- att_def.tsv ([CM6](#CM6-f_attr_rng_default))
->- ENEW_ENEtag_20200427_mod.tsv ([CP5](#cp5-f_enew_info_default))
->- mention_gold_link_dist.tsv ([CP6](#cp6-f_mention_gold_link_dist_default))
->- common_html_tag_info.tsv ([CP7](#cp7-f_common_html_info_default))
+>- cat_att_selflink.tsv ([CP7](#cp7-f_slink_default))
 >- jawiki-20190120-title2pageid_ext.tsv ([CP8](#cp8-f_title2pid_ext_default))
 >- sample_cat_att_mention_linkcand.tsv ([CP9](#cp9-f_link_prob_default))
->- cat_att_selflink.tsv ([CP10](#cp10-f_slink_default))
+
 
 (preprocessing)
 > - jawiki-20190121-cirrussearch-content.json.gz ([CD1](#cd1-f_cirrus_content_default)) 
@@ -133,27 +131,27 @@ The directories are specified as command line arguments or options when you try 
      + Person
        + *.html (IT4)
   ```
-  *1: [CP1](#cp1-sample-gold-data-info) files (*.tsv) are also created in the same directory in preprocessing.
+  *1: [SP1](#sp1-sample-gold-data-info) files (*.tsv) will be also created in the same directory in preprocessing.
 
 # DATA DESCRIPTION
 
 ## (1) project SHINRA data distribution
 ## (1-1) test data and html files (in_dir)
 ### IT1 (test data)
-- filename: Airport.json, City.json, Company.json, Compound.json, Conference.json, Lake.json, Person.json
+- filename: 'Airport.json', 'CIty.json', Company.json', 'Compound.json', 'Conference.json', 'Lake.json', 'Person.json'
 - description: Test data.
 - available from: [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) 公開データ/コード ([評価データ: 入力ファイル、対象のWikipediaページ](https://drive.google.com/file/d/1iEciat50vSaGJ9d9FQz20k8eRt2mMGN7/view?usp=sharing)) 
 - used in: (linkjpc) linkjpc, (linkjpc_prep) linkjpc_prep
 
 ### IT2 (original articles of test data (*.html))
 - filename: *.html
-- description: *.html files of the original articles of test data. The files are grouped by ENE categories (eg. Airport, City, etc.)
+- description: *.html files of the original articles of test data. The files are grouped by ENE categories (eg. 'Airport, 'CIty, etc.)
 - available from: [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) 公開データ/コード ([評価データ: 入力ファイル、対象のWikipediaページ](https://drive.google.com/file/d/1iEciat50vSaGJ9d9FQz20k8eRt2mMGN7/view?usp=sharing))
 - used in: (linkjpc_prep)gen_html_info_file
 
 ## (1-2) (sample data and html files (sample_gold_dir)
 ### IT3 (sample gold data)
-- filename: Airport.json, City.json, Company.json, Compound.json, Conference.json, Lake.json, Person.json
+- filename: 'Airport.json', 'City.json', 'Company.json', 'Compound.json', 'Conference.json', 'Lake.json', 'Person.json'
 - description: Sample gold data.
 - available from: [SHINRA2021LinkJP](http://shinra-project.info/shinra2021linkjp/) 公開データ/コード ([サンプルデータ](https://drive.google.com/file/d/1b9Xm-Qd1sVfmDr8o4y3t-dVnGai15P-q/view?usp=sharing)) 
 - used in: (linkjpc_prep)gen_link_prob_file
@@ -257,15 +255,27 @@ Download the data listed below from _URL(to be prepared)_ .
 
 
 ## (3) data created by preprocessing tools
-## (3-1) (common_data_dir)
+## (3-1) (sample_gold_dir)
 
-### CP1 (sample gold data info)
- - filename: **Airport.tsv, City.tsv, Company.tsv, Compound.tsv, Conference.tsv, Lake.tsv, Person.tsv** 
+### SP1 (sample gold data info)
+ - filename: **Airport.tsv, City.tsv, 'Company.tsv, 'Compound.tsv, 'Conference.tsv, 'Lake.tsv, 'Person.tsv** 
  - description: Sample gold data info.
  - format: org_pageid, org_title, attribute_name, mention, start_line_id, start_offset, end_line_id, end_offset, gold_pageid, gold_title (*.tsv)
  - sample: 573393  森見登美彦      生誕地  日本・奈良県生駒市      35      33      35      42      22003   生駒市
  - created by: (linkjpc_prep --gen_sample_gold_tsv) linkedjson2tsv
  - used in: (linkjpc_prep) gen_link_prob_file, gen_mention_gold_link_dist
+
+## (3-2) (common_data_dir)
+
+### CP1 (f_common_html_info_default) 
+ - filename: '**common_html_tag_info.tsv**'
+ - description: Info on embedded links to other Wikipedia pages in original articles of sample data
+ - format: 
+   - cat, pid, line_id, text_start, text_end, text, title (*.tsv)
+ - sample: 
+   - `City    1617736 90      292     298     リンブルフ州 リンブルフ州 (ベルギー)`
+ - created by: gen_html_info_file
+ - used in: (linkjpc_prep) gen_mention_gold_link_dist
 
 ### CP2 (f_disambiguation_default)
  - filename: '**jawiki-20190121-cirrussearch-content_disambiguation.tsv**'
@@ -327,15 +337,16 @@ Download the data listed below from _URL(to be prepared)_ .
  - created by: (linkjpc_prep --gen_link_dist) gen_mention_gold_link_dist
  - used in: (linkjpc_prep --gen_link_dist) gen_mention_gold_link_dist_info
 
-### CP7 (f_common_html_info_default) 
- - filename: '**common_html_tag_info.tsv**'
- - description: Info on embedded links to other Wikipedia pages in original articles of sample data
- - format: 
-   - cat, pid, line_id, text_start, text_end, text, title (*.tsv)
- - sample: 
-   - `City    1617736 90      292     298     リンブルフ州 リンブルフ州 (ベルギー)`
- - created by: gen_html_info_file
- - used in: (linkjpc_prep) gen_mention_gold_link_dist
+### CP7 (f_slink_default) 
+ - filename: '**cat_att_selflink.tsv**'
+ - description: Self link info file to estimate the probability of linking to the original article for each category-attribute pair. 
+ - format: ene_label_en, attribute_name, ratio (*.tsv)
+ - sample:
+   - `Person  家族    0.0`
+   - `Person  別名    1.0`
+ - note: The ratio is based on SHINRA2021-LinkJP sample data (ver.20210428).
+ - created by: (linkjpc_prep --gen_slink) gen_self_link_info
+ - used in: (linkjpc) sl.check_slink_info
 
 ### CP8 (f_title2pid_ext_default) 
  - filename: '**jawiki-20190120-title2pageid_ext.tsv**'
@@ -364,18 +375,8 @@ Download the data listed below from _URL(to be prepared)_ .
  - created by: (linkjpc_prep --gen_link_prob) gen_link_prob_file 
  - used in: (linkjpc) lp.get_link_prob_info
 
-### CP10 (f_slink_default) 
- - filename: '**cat_att_selflink.tsv**'
- - description: Self link info file to estimate the probability of linking to the original article for each category-attribute pair. 
- - format: ene_label_en, attribute_name, ratio (*.tsv)
- - sample:
-   - `Person  家族    0.0`
-   - `Person  別名    1.0`
- - note: The ratio is based on SHINRA2021-LinkJP sample data (ver.20210428).
- - created by: (linkjpc_prep --gen_slink) gen_self_link_info
- - used in: (linkjpc) sl.check_slink_info
 
-## (3-2) (tmp_data_dir)
+## (3-3) (tmp_data_dir)
 
 ### TP1 (f_input_title_default)
  - filename: '**input_title.txt**'
@@ -456,19 +457,19 @@ Download the data listed below from _URL(to be prepared)_ .
  - created by: (linkjpc_prep --gen_html) gen_html_info_file
  - used by: (linkjpc) gw.reg_tag_info
  
-## (3) data created by entity linking
-### (3-1) (out_dir)
+## (4) data created by entity linking
+### (4-1) (out_dir)
 
 ### OL1 (output data)
- - filename: **Airport.json, City.json, Company.json, Compound.json, Conference.json, Lake.json, Person.json**
+ - filename: **'Airport.json', 'City.json', 'Company.json', 'Compound.json', 'Conference.json', 'Lake.json', 'Person.json'**
  - description: Output data.
  - format: [SHINRA2021-LinkJP data format](http://shinra-project.info/shinra2021linkjp/#data-format)
 
-### (3-2) (common_data_dir)
+### (4-2) (common_data_dir)
 
 ### CL1 (f_mention_gold_link_dist_info_default) 
  - filename: '**mention_gold_link_dist_info.tsv**'
- - description: Summary of gold links of mentions by category * attribute.
+ - description: Summary of distance from mentions to links to gold pages by category and attribute.
  - format: 
    - cat, attr, backward_limit, forward_limit, diff_backward_num, diff_forward_num, diff_same_num, all_num (tsv)
  - sample:
