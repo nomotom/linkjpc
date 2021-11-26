@@ -94,8 +94,8 @@ _--attr_len_,<br>_-al_|scoring of the ENEID of candidate page as attribute range
 _--f_attr_rng_|filename of attribute range definition file. The ranges are given as ENEIDs.|string| |_att_def.tsv_<br>(cf.OptInfo.f_attr_rng_default)| 
 _--f_enew_info_|filename of enew_info_file.|string| |_ENEW_ENEtag_20200427_mod.tsv_<br>(cf.OptInfo.f_enew_info_default)|
 
-#### filtering: (pl: page_link)
+#### filtering: (bl: back_link)
 option|description| type | value|  default | note
 :-----------------------------------|:-----------------|:---------|:---------|:---------|:---------------
-_--**back_link_tgt**_,<br>_-**bl_tgt**_|target module of back link filtering, specified as the combination of the following characters. <br>_m_: mint,<br>_t_: tinm,<br>_w_: wlink,<br>_s_: slink, <br>_l_: link_prob, <br>_n_: N/A|string| combination of [_m_, _t_, _w_, _s_, _l_] or ['n']|'n'<br>(cf.OptInfo.back_link_tgt_default)|required when page_link is used.
+_--**back_link_tgt**_,<br>_-**bl_tgt**_|target module of back link filtering, specified as the combination of the following characters. <br>_m_: mint,<br>_t_: tinm,<br>_w_: wlink,<br>_s_: slink, <br>_l_: link_prob, <br>_n_: N/A|string| combination of [_m_, _t_, _w_, _s_, _l_] or ['n']|'n'<br>(cf.OptInfo.back_link_tgt_default)|required when back_link is used.
 _--back_link_ng_,<br>_-bl_ng_|score for not back link|float| |0.7<br>cf.OptInfo.back_link_ng_default)|  
