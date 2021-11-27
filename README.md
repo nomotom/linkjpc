@@ -55,7 +55,7 @@ and/or backlinks.
 - **get_wlink.py(gw)** (finding embedded links to the referred Wikipedia page)
    - Find embedded links in original pages as candidates of the links to the Wikipedia pages to which mentions refer.
 - **link_prob.py(lp)** (link probability estimation)
-   - Estimate the prob**ability of linking mention-page pairs based on statistics of sample gold data.
+   - Estimate the probability of linking mention-page pairs based on statistics of sample gold data.
 
 #### filtering 
 - **attr_range_filtering.py(ar)** (filtering by rule-based class estimation of mentions (attribute values))
