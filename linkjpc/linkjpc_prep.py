@@ -1763,14 +1763,12 @@ def linkedjson2tsv(linked_json_dir, title2pid_org_file, log_info):
                 # in case of multiple lines
                 text_pre = g_key_list[3]
                 g_key_list[3] = '\\n'.join(text_pre.splitlines())
-                # g_key_list[3] = re.sub(r"[\r\n]", "__NR__", text_pre)
 
                 if get_title.get(g_link_pageid):
                     g_link_title = get_title[g_link_pageid]
                     g_key_list.insert(8, g_link_title)
                 g_title_pageid = g_key_list[0]
                 if get_title.get(g_title_pageid):
-                # if get_title.get(g_link_pageid):
                     g_org_title = get_title[g_title_pageid]
                     g_key_list.insert(1, g_org_title)
 
