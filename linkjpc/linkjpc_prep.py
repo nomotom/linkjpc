@@ -1789,7 +1789,7 @@ def get_key_list(log_info, **tr):
         pid = tr['page_id']
     except (KeyError, ValueError) as ex:
         logger.error({
-            'action': 'get_key_plus',
+            'action': 'get_key_list',
             'error': ex,
             'tr': tr
         })
