@@ -1691,6 +1691,8 @@ def linkedjson2tsv(linked_json_dir, title2pid_org_file, log_info):
                 link_page_title
             sample
                 2392906	桐谷華	地位職業	声優	38	20	38	22	1192	声優
+    notice
+        '\n' in text(mention) has been converted to '\\n' to avoid multiple lines.
     """
 
     import json
@@ -1764,6 +1766,9 @@ def linkedjson2tsv(linked_json_dir, title2pid_org_file, log_info):
                 if get_title.get(g_link_pageid):
                     g_org_title = get_title[g_title_pageid]
                     g_key_list.insert(1, g_org_title)
+                    # in case of multiple lines
+                    text_pre = g_key_list[3]
+                    g_key_list[3] = '\\n'.join(text_pre.splitlines())
                 go_list.append(g_key_list)
 
             df_go = pd.DataFrame(go_list)
