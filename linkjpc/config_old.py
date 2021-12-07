@@ -59,7 +59,7 @@ class OptInfo(object):
     wl_lines_forward_ca_default = 'r'
     wl_lines_backward_ca_ratio_default = 0.9
     wl_lines_forward_ca_ratio_default = 0.9
-    wl_break_default = True
+    wl_break_default = 1
 
     # link_prob
     lp_min_default = 0.5

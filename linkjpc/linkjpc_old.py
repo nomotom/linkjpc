@@ -136,7 +136,7 @@ def set_logging(log_info, logger_name):
               default=cf.OptInfo.wl_score_forward_default, show_default=True,
               help='score for the links around the mention (forward lines) in the page (when l is specified in wlink).'
                    '(0.0-1.0) ')
-@click.option('--wl_break/--no-wl_break', default=cf.OptInfo.wl_break_default, show_default=True,
+@click.option('--wl_break', default=cf.OptInfo.wl_break_default, show_default=True,
               help='flag to stop searching candidate wikilinks at the line in which nearest candidate link is found')
 @click.option('--wl_lines_backward_max', '-wl_bmax', type=click.INT,
               default=cf.OptInfo.wl_lines_backward_max_default, show_default=True,
