@@ -108,7 +108,7 @@ def set_logging(log_info, logger_name):
                    'r: add higher score to the rightmost link in the mention than others, '
                    'm: give equal score to all the links in the mention'
                    'p: give score to the links of the previous same mentions in the page'
-                   'l: give score to the links around the mention in the lines of page specified with wl_lines_pre_max '
+                   'l: give score to the links around the mention in the lines of page specified with wl_lines_backward_max '
                    'and wl_lines_forward_max'
                    'n: N/A. '
                    'Notice that m cannot be used with f or r.')
