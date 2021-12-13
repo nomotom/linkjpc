@@ -68,15 +68,19 @@ def get_link_prob_info(link_prob_file, lp_min, log_info):
         for lp_row in lp_reader:
             cat_att_mention = lp_row[0] + '\t' + lp_row[1] + '\t' + lp_row[2]
             pid_ratio_freq_list = re.split(';', lp_row[3])
-            pid_ratio_freq = re.split(':', pid_ratio_freq_list[0])
-            cand_pid = pid_ratio_freq[0]
+            max_ratio = 0.0
+            for pid_ratio_freq in pid_ratio_freq_list:
+                prf_list = re.split(':', pid_ratio_freq)
+                tmp_ratio = float(prf_list[1])
 
-            if float(pid_ratio_freq[1]) >= lp_min:
-                cat_att_mention_pid = cat_att_mention + '\t' + cand_pid
+                if tmp_ratio >= lp_min and tmp_ratio >= max_ratio:
+                    max_ratio = tmp_ratio
+                    cand_pid = prf_list[0]
+                    cat_att_mention_pid = cat_att_mention + '\t' + cand_pid
 
-                if not check_cat_att_mention_pid.get(cat_att_mention_pid):
-                    if not d_link_prob.get(cat_att_mention):
-                        d_link_prob[cat_att_mention] = []
-                    d_link_prob[cat_att_mention].append([cand_pid, pid_ratio_freq[1]])
-                    check_cat_att_mention_pid[cat_att_mention_pid] = 1
+                    if not check_cat_att_mention_pid.get(cat_att_mention_pid):
+                        if not d_link_prob.get(cat_att_mention):
+                            d_link_prob[cat_att_mention] = []
+                        d_link_prob[cat_att_mention].append([cand_pid, tmp_ratio])
+                        check_cat_att_mention_pid[cat_att_mention_pid] = 1
     return d_link_prob
