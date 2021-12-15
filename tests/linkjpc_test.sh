@@ -20,7 +20,6 @@ python $script $common_data_dir $tmp_data_dir $in_dir ${out_dir_base}mint_e/ --m
 #   - [m]: exact match (e), mention in title (mint)
 
 
-
 ## EXAMPLE (wikipedia link)
 python $script $common_data_dir $tmp_data_dir $in_dir ${out_dir_base}wlink_frp/ --mod w --wlink frp
 #
@@ -49,6 +48,21 @@ python $script $common_data_dir $tmp_data_dir $in_dir ${out_dir_base}slink_05_mi
 #          slink probability of the category-attribute pairs: average of fixed value(1.0) and ratio based on sample data (mid)
 #   - [m]: exact match (e), mention in title (mint)
 #   - [w]: add higher score to the first link and rightmost link in the mention than others (fr)
+#          give score to the links of the previous same mentions in the page (p)
+# filtering: [a(attr_range_filtering)]
+#   - target: [w] (get_wlink)
+#   - scoring: adjusted matching ratio + modified depth (modify the adjusted depth to diminish its influence) (am)
+# filtering:  [b(back_link)]
+#   - target: [w] (get_wlink)
+
+## EXAMPLE (self link > exact match > wikipedia link (+attribute range filtering, back link filtering), link_prob
+python $script $common_data_dir $tmp_data_dir $in_dir ${out_dir_base}slink_05_mid__mint_e__wlink_rp_l_06_attr_w_al_am_bl_w/ --mod s:m:lw -f ab --mint e -s_min 0.5 -s_prb mid --wlink rp -ar_tgt w -al am -bl_tgt w -l_min 0.6
+#
+# priority of main modules: [self link (s)]  > [matching (m)] > [get_wlink (w)], [link_prob (l)]
+#   - [s]: minimum self link ratio of attributes (0.5)
+#          slink probability of the category-attribute pairs: average of fixed value(1.0) and ratio based on sample data (mid)
+#   - [m]: exact match (e), mention in title (mint)
+#   - [w]: add higher score to the rightmost link in the mention than others (r)
 #          give score to the links of the previous same mentions in the page (p)
 # filtering: [a(attr_range_filtering)]
 #   - target: [w] (get_wlink)
