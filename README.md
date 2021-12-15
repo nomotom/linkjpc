@@ -41,7 +41,7 @@ example |original page (entity) | attribute name|mention / attribute value | pag
 - Allows combination of main modules to utilize string matching (between mentions and page titles), finding embedded links to the referred page, self-link estimation, link probability estimation based on statistics.
 - Each module can be combined with up to three types of filtering modules (called 'filtering' hereafter), which use attribute range (rule-based class estimation of candidate link pages), number of incoming links,
 and/or backlinks.
-- Do without machine learning (but with heavy preprocessing).
+- Heavy preprocessing.
 
 ## MODULES
 ### Entity linking
