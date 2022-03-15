@@ -39,8 +39,8 @@ example |original page (entity) | attribute name|mention / attribute value | pag
 **_linkjpc_** has the following key features. 
 
 - Allows combination of main modules to utilize string matching (between mentions and page titles), finding embedded links to the referred page, self-link estimation, link probability estimation based on statistics.
-- Each module can be combined with up to three types of filtering modules (called 'filtering' hereafter), which use attribute range (rule-based class estimation of candidate link pages), number of incoming links,
-and/or backlinks.
+- Each module can be combined with up to four types of filtering modules (called 'filtering' hereafter), which use attribute range (rule-based class estimation of candidate link pages), number of incoming links,
+and/or backlinks, and nil detection.
 - Heavy preprocessing.
 
 ## MODULES
@@ -61,6 +61,7 @@ and/or backlinks.
 - **attr_range_filtering.py(ar)** (filtering by rule-based class estimation of mentions (attribute values))
 - **incl_filtering.py(il)** (filtering by number of incoming links)
 - **back_link.py(bl)** (filtering by backlinks)
+- **detect_nil.py(dn)** (filtering by nil (unlikable) detection)
 
 #### others
 - **config.py(cf)** (definition of classes, etc.)
@@ -117,12 +118,12 @@ scripts (eg. _linkjpc_prep_all_test.sh_) in **_tests_** directory.
  (A) --gen_redirect -> --gen_incoming_link -> --gen_title2pid_ext -> --gen_back_link, --pre_matching, --gen_self_link_info 
  (B) --gen_sample_gold_tsv --> --gen_link_dist, gen_link_prob, gen_self_link_info
  (C) --gen_common_html -> --gen_link_dist
- (D) --gen_html
+ (D) --gen_html, gen_linkable
 ```
 ### Processing Time
 
 The preprocessing process can be time-consuming.  
-For your reference, the entire preprocessing time using the sample script in _test_ folder is about 34 hours in the following environment.
+For your reference, the entire preprocessing time (except --gen_linkable) using the sample script in _test_ folder is about 34 hours in the following environment.
 
 (Environment):  
 OS: Mac OS 10.15.7  
