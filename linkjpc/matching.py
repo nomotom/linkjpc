@@ -25,7 +25,7 @@ def match_mention_title(mod, opt_info, mention, log_info, **d_mention_pid_ratio)
     logger.setLevel(logging.INFO)
 
     match_type = ''
-    char_match_min = ''
+    char_mach_min = 0
     if mod == 'm':
         match_type = opt_info.mention_in_title
         char_match_min = opt_info.mention_in_title_min
@@ -66,10 +66,11 @@ def match_mention_title(mod, opt_info, mention, log_info, **d_mention_pid_ratio)
                 else:
                     cand_cnt += 1
 
-        new_cand_list = sorted(cand_list, key=itemgetter(2), reverse=True)
-        if len(new_cand_list) > 0:
-            cand_limit = min(opt_info.char_match_cand_num_max, len(new_cand_list))
-            del new_cand_list[cand_limit:]
+        if len(cand_list) > 0:
+            new_cand_list = sorted(cand_list, key=itemgetter(2), reverse=True)
+            if len(new_cand_list) > 0:
+                cand_limit = min(opt_info.char_match_cand_num_max, len(new_cand_list))
+                del new_cand_list[cand_limit:]
     return new_cand_list
 
 

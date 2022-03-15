@@ -1,4 +1,5 @@
 # modules
+import detect_nil as dn
 import incl_filtering as il
 import matching as mc
 import get_wlink as gw
@@ -37,10 +38,12 @@ def set_logging(log_info, logger_name):
 @click.argument('in_dir', type=click.Path(exists=True))
 @click.argument('out_dir',  type=click.Path(dir_okay=True))
 # common
-@click.option('--filtering', '-f', type=click.Choice(['a', 'i', 'b', 'i', 'ai', 'ab', 'bi', 'abi', 'n']), required=True,
+@click.option('--filtering', '-f', type=click.Choice(['a',  'b', 'i', 'n', 'ai', 'ab', 'an', 'bi', 'bn', 'in',
+                                                      'abi', 'abn', 'ain', 'bin', 'abin', 'x']), required=True,
               default=cf.OptInfo.filtering_default, show_default=True,
               help='types of filtering used in any module, a: attribute range filtering, i: filtering by incoming link '
-                   'num,　b: backlink, ai: both a and i, ab: both a and b, bi: both b and i, n: N/A')
+                   'num,　b: backlink, n: nil detection filtering, ai, ab, ..., abin: combination of a, b ,i, n, '
+                   'x: N/A')
 @click.option('--mod', type=click.STRING, required=True,
               help='a comma-separated priority list of module groups'
                    '(denoted by the combination of characters (m, t, w, s, l)) to be used'
@@ -108,8 +111,8 @@ def set_logging(log_info, logger_name):
                    'r: add higher score to the rightmost link in the mention than others, '
                    'm: give equal score to all the links in the mention'
                    'p: give score to the links of the previous same mentions in the page'
-                   'l: give score to the links around the mention in the lines of page specified with wl_lines_backward_max '
-                   'and wl_lines_forward_max'
+                   'l: give score to the links around the mention in the lines of page specified with '
+                   'wl_lines_backward_max and wl_lines_forward_max'
                    'n: N/A. '
                    'Notice that m cannot be used with f or r.')
 @click.option('--f_html_info', type=click.STRING,
@@ -245,6 +248,48 @@ def set_logging(log_info, logger_name):
 @click.option('--back_link_ng', '-bl_ng', type=click.FLOAT,
               default=cf.OptInfo.back_link_ng_default, show_default=True,
               help='score for not back link')
+# filtering: detect_nil
+@click.option('--nil_tgt', '-n_tgt', type=click.STRING,
+              default=cf.OptInfo.back_link_tgt_default, show_default=True,
+              help='target module of nil detection filtering,'
+                   'specified as the combination of the following characters'
+                   'm: mint, t: tinm, w: wlink, s: slink, l: link_prob, n: N/A')
+@click.option('--nil_cond', '-n_cond',
+              type=click.Choice(['and_prob_len_desc', 'and_prob_or_len_desc', 'and_len_or_prob_desc',
+                                 'and_desc_or_prob_len', 'two_of_prob_len_desc']),
+              default=cf.OptInfo.nil_cond_default, show_default=True,
+              help='how to evaluate nil (unlinkable) for each mention using prob (estimated linkable ratio for '
+                   'category-attribute pairs based on sample data), len(minimum length of mention), and desc '
+                   '(descriptiveness of mentions). '
+                   'and_prob_len_desc: judge as nil if all conditions (prob, len, desc) are satisfied. '
+                   'and_prob_or_len_desc: judge as nil if prob condition is satisfied and either len condition or desc '
+                   'condition is satisfied. '
+                   'and_len_or_prob_desc: judge as nil if len condition is satisfied and either prob condition or desc '
+                   'condition is satisfied. '
+                   'and_desc_or_prob_len: judge as nil if desc condition is satisfied and either prob condition or len '
+                   'condition is satisfied.'
+                   'two_of_prob_len_desc: judge as nil if at least two of the conditions(prob, len, and desc) are '
+                   'satisfied. ')
+@click.option('--nil_desc_exception', '-n_exc', type=click.STRING,
+              default=cf.OptInfo.nil_desc_exception_default, show_default=True,
+              help='a colon-separated exception list of exception of nil -desc- condition. If any of the following is '
+                   'specified, desc condition is not evaluated for the corresponding category attribute pairs. '
+                   'eg. person_works:company_trade_names'
+                   'person_works: (Person:作品)'
+                   'company_trade_names: (Company:商品名)'
+                   'Specify n (N/A) for no exception.')
+@click.option('--nil_cat_attr_max', '-n_max', type=click.FLOAT,
+              default=cf.OptInfo.nil_cat_attr_max_default, show_default=True,
+              help='maximum ratio of unlinkable category attribute pairs in the sample data. If nil ratio of the '
+                   'category-attribute pair of a mention is less than the ratio, the mention might be judged as '
+                   'unlinkable. (0.1-1.0)')
+@click.option('--len_desc_text_min', '-ld_min', type=click.INT,
+              default=cf.OptInfo.len_desc_text_min_default, show_default=True,
+              help='minimum length of mention text regarded as descriptive')
+@click.option('--f_linkable_info', type=click.STRING,
+              default=cf.DataInfo.f_linkable_info_default, show_default=True,
+              help='filename of linkable ratio info file.')
+
 # ljc_main
 def ljc_main(common_data_dir,
              tmp_data_dir,
@@ -267,6 +312,7 @@ def ljc_main(common_data_dir,
              f_slink,
              f_wl_lines_backward_ca,
              f_wl_lines_forward_ca,
+             f_linkable_info,
              f_link_prob,
              f_tinm,
              f_tinm_trim,
@@ -275,11 +321,16 @@ def ljc_main(common_data_dir,
              incl_max,
              incl_tgt,
              incl_type,
+             len_desc_text_min,
              lp_min,
              mint,
              mint_min,
              mod,
              mod_w,
+             nil_cat_attr_max,
+             nil_cond,
+             nil_desc_exception,
+             nil_tgt,
              score_type,
              slink_min,
              slink_prob,
@@ -324,6 +375,7 @@ def ljc_main(common_data_dir,
     :param f_slink:
     :param f_wl_lines_backward_ca:
     :param f_wl_lines_forward_ca:
+    :param f_linkable_info:
     :param f_link_prob:
     :param f_tinm:
     :param f_tinm_trim:
@@ -332,11 +384,16 @@ def ljc_main(common_data_dir,
     :param incl_max:
     :param incl_tgt:
     :param incl_type:
+    :param len_desc_text_min:
     :param lp_min:
     :param mint:
     :param mint_min:
     :param mod:
     :param mod_w:
+    :param nil_cat_attr_max:
+    :param nil_cond:
+    :param nil_desc_exception:
+    :param nil_tgt:
     :param score_type:
     :param slink_min:
     :param slink_prob:
@@ -377,6 +434,11 @@ def ljc_main(common_data_dir,
     opt_info.title_matching_mint = title_matching_mint
     opt_info.title_matching_tinm = title_matching_tinm
     opt_info.char_match_cand_num_max = char_match_cand_num_max
+    opt_info.len_desc_text_min = len_desc_text_min
+    opt_info.nil_cat_attr_max = nil_cat_attr_max
+    opt_info.nil_cond = nil_cond
+    opt_info.nil_desc_exception = nil_desc_exception
+    opt_info.nil_tgt = nil_tgt
     opt_info.mention_in_title = mint
     opt_info.mention_in_title_min = mint_min
     opt_info.wikilink = wlink
@@ -453,6 +515,7 @@ def ljc_main(common_data_dir,
     data_info.attr_range_file = data_info.common_data_dir + f_attr_rng
     data_info.title2pid_ext_file = data_info.common_data_dir + f_title2pid_ext
     data_info.enew_info_file = data_info.common_data_dir + f_enew_info
+    data_info.linkable_info_file = data_info.common_data_dir + f_linkable_info
     data_info.link_prob_file = data_info.common_data_dir + f_link_prob
     data_info.mention_gold_link_dist_info_file = data_info.common_data_dir + f_mention_gold_link_dist_info
     data_info.slink_file = data_info.common_data_dir + f_slink
@@ -492,7 +555,15 @@ def ljc_main(common_data_dir,
     d_link_prob = {}
     d_back_link = {}
     diff_info = {}
+    d_linkable = {}
 
+    # # detect_nil
+    # d_linkable = dn.check_linkable_info(data_info.linkable_info_file, log_info)
+    # logger.info({
+    #     'action': 'ljc_main',
+    #     'run': 'dn.check_linkable_info',
+    #     'linkable_file': data_info.linkable_info_file,
+    # })
     # mint
     if (opt_info.mention_in_title == 'e' or opt_info.mention_in_title == 'p') and 'm' not in opt_info.mod:
         logger.error({
@@ -827,6 +898,75 @@ def ljc_main(common_data_dir,
             })
             cf.d_pid2eneid = ar.reg_enew_info(data_info.enew_info_file, log_info)
             d_cat_attr2eneid_prob = ar.get_attr_range(data_info.attr_range_file, opt_info, log_info)
+    # nil_detection
+    if ('m' in opt_info.nil_tgt or
+        't' in opt_info.nil_tgt or
+        'w' in opt_info.nil_tgt or
+        's' in opt_info.nil_tgt or
+        'l' in opt_info.nil_tgt) \
+            and 'n' not in opt_info.filtering:
+        logger.error({
+            'action': 'ljc_main',
+            'option combination error': 'nil_tgt is set, but missing filtering option n'
+        })
+        sys.exit()
+    elif 'n' in opt_info.filtering:
+        if not opt_info.nil_tgt:
+            logger.error({
+                'action': 'ljc_main',
+                'missing nil_tgt': 'nil detection is specified, but missing nil_tgt'
+            })
+            sys.exit()
+        elif ('m' not in opt_info.nil_tgt and
+              't' not in opt_info.nil_tgt and
+              'w' not in opt_info.nil_tgt and
+              's' not in opt_info.nil_tgt and
+              'l' not in opt_info.nil_tgt):
+            logger.error({
+                'action': 'ljc_main',
+                'illegal nil_tgt': 'nil detection is specified, but illegal nil_tgt'
+            })
+            sys.exit()
+        elif ('and_prob_len_desc' not in opt_info.nil_cond and
+              'and_prob_or_len_desc' not in opt_info.nil_cond and
+              'and_len_or_prob_desc' not in opt_info.nil_cond and
+              'and_desc_or_prob_len' not in opt_info.nil_cond and
+              'two_of_prob_len_desc' not in opt_info.nil_cond):
+            logger.error({
+                'action': 'ljc_main',
+                'illegal nil_cond': 'nil detection is specified, but illegal nil_cond'
+            })
+            sys.exit()
+        elif opt_info.nil_desc_exception != 'n':
+            if not '_' in opt_info.nil_desc_exception:
+                logger.error({
+                    'action': 'ljc_main',
+                    'illegal nil_desc_exception': 'nil detection is specified, but illegal nil_desc_exception'
+                })
+                sys.exit()
+        elif opt_info.nil_cat_attr_max > 1.0:
+                logger.error({
+                    'action': 'ljc_main',
+                    'illegal nil_cat_attr_max': 'nil detection is specified, but illegal nil_cat_attr_max'
+                })
+                sys.exit()
+        elif opt_info.len_desc_text_min < 0:
+                logger.error({
+                    'action': 'ljc_main',
+                    'illegal len_desc_text_min': 'nil detection is specified, but illegal len_desc_text_min'
+                })
+                sys.exit()
+
+        else:
+            logger.info({
+                'action': 'ljc_main',
+                'run': 'dn.check_linkable_info',
+                'nil_tgt': opt_info.nil_tgt,
+                'nil_cond': opt_info.nil_cond,
+                'nil_desc_exception': opt_info.nil_desc_exception,
+                'linkable_file': data_info.linkable_info_file,
+            })
+        d_linkable = dn.check_linkable_info(data_info.linkable_info_file, log_info)
 
     for in_file in glob(in_files):
         list_rec_out = []
@@ -844,13 +984,6 @@ def ljc_main(common_data_dir,
 
             for i_line in i:
                 rec = json.loads(i_line)
-                # check_t = 0
-                # check_m = 0
-                # check_s = 0
-                # check_l = 0
-                # check_w = 0
-                # check_i = 0
-                # check_a = 0
 
                 link_info = cf.LinkInfo('linfo')
 
@@ -875,14 +1008,22 @@ def ljc_main(common_data_dir,
                 cat_attr = mention_info.ene_cat + ':' + mention_info.attr_label
 
                 # modules (+ filtering)
+
                 # wlink
                 if 'w' in opt_info.mod:
-
-                    wlink_cand_list = gw.check_wlink(mention_info, opt_info, log_info, **diff_info)
+                    wlink_cand_list = []
+                    # nil detection
+                    if 'n' in opt_info.filtering and 'w' in opt_info.nil_tgt:
+                        dn_res = dn.estimate_nil(cat_attr, mention_info, opt_info, log_info, **d_linkable)
+                        if not dn_res:
+                            wlink_cand_list = gw.check_wlink(mention_info, opt_info, log_info, **diff_info)
+                    else:
+                        wlink_cand_list = gw.check_wlink(mention_info, opt_info, log_info, **diff_info)
 
                     # filtering
-                    if wlink_cand_list:
+                    if len(wlink_cand_list) > 0:
                         w_tmp_cand_list = copy.deepcopy(wlink_cand_list)
+
                         if 'a' in opt_info.filtering and 'w' in opt_info.attr_range_tgt:
                             wlink_cand_list_attr_checked = ar.filter_by_attr_range(w_tmp_cand_list,
                                                                                    mention_info,
@@ -913,10 +1054,18 @@ def ljc_main(common_data_dir,
 
                 # slink
                 if 's' in opt_info.mod:
-                    s_tmp_cand_list = []
-                    slink_cand_list = sl.estimate_self_link(cat_attr, opt_info.slink_prob, mention_info, log_info,
-                                                            **d_self_link)
-                    if slink_cand_list:
+                    slink_cand_list = []
+                    if 'n' in opt_info.filtering and 's' in opt_info.nil_tgt:
+                        # nil detection
+                        dn_res = dn.estimate_nil(cat_attr, mention_info, opt_info, log_info, **d_linkable)
+                        if not dn_res:
+                            slink_cand_list = sl.estimate_self_link(cat_attr, opt_info.slink_prob, mention_info, log_info,
+                                                                    **d_self_link)
+                    else:
+                        slink_cand_list = sl.estimate_self_link(cat_attr, opt_info.slink_prob, mention_info, log_info,
+                                                                **d_self_link)
+                    # filtering
+                    if len(slink_cand_list) > 0:
                         s_tmp_cand_list = copy.deepcopy(slink_cand_list)
 
                         # filtering
@@ -950,12 +1099,21 @@ def ljc_main(common_data_dir,
                             # check_s = 1
                 # mint
                 if 'm' in opt_info.mod:
-                    m_tmp_cand_list = []
+                    mint_cand_list = []
                     mod = 'm'
-                    mint_cand_list = mc.match_mention_title(mod, opt_info, mention_info.t_mention, log_info,
-                                                            **d_mint_mention_pid_ratio)
+                    if 'n' in opt_info.filtering and 'm' in opt_info.nil_tgt:
+                        # nil detection
+                        dn_res = dn.estimate_nil(cat_attr, mention_info, opt_info, log_info, **d_linkable)
+                        if not dn_res:
+
+                            mint_cand_list = mc.match_mention_title(mod, opt_info, mention_info.t_mention, log_info,
+                                                                    **d_mint_mention_pid_ratio)
+                    else:
+                        mint_cand_list = mc.match_mention_title(mod, opt_info, mention_info.t_mention, log_info,
+                                                                **d_mint_mention_pid_ratio)
+
                     # filtering
-                    if mint_cand_list:
+                    if len(mint_cand_list) > 0:
                         m_tmp_cand_list = copy.deepcopy(mint_cand_list)
                         if 'a' in opt_info.filtering and 'm' in opt_info.attr_range_tgt:
                             mint_cand_list_attr_checked = ar.filter_by_attr_range(m_tmp_cand_list,
@@ -987,13 +1145,20 @@ def ljc_main(common_data_dir,
 
                 # tinm
                 if 't' in opt_info.mod:
-                    t_tmp_cand_list = []
+                    tinm_cand_list = []
                     mod = 't'
-                    tinm_cand_list = mc.match_mention_title(mod, opt_info, mention_info.t_mention, log_info,
-                                                            **d_tinm_mention_pid_ratio)
 
+                    if 'n' in opt_info.filtering and 't' in opt_info.nil_tgt:
+                        # nil detection
+                        dn_res = dn.estimate_nil(cat_attr, mention_info, opt_info, log_info, **d_linkable)
+                        if not dn_res:
+                            tinm_cand_list = mc.match_mention_title(mod, opt_info, mention_info.t_mention, log_info,
+                                                                    **d_tinm_mention_pid_ratio)
+                    else:
+                        tinm_cand_list = mc.match_mention_title(mod, opt_info, mention_info.t_mention, log_info,
+                                                                **d_tinm_mention_pid_ratio)
                     # filtering
-                    if tinm_cand_list:
+                    if len(tinm_cand_list) > 0:
                         t_tmp_cand_list = copy.deepcopy(tinm_cand_list)
                         if 'a' in opt_info.filtering and 't' in opt_info.attr_range_tgt:
                             tinm_cand_list_attr_checked = ar.filter_by_attr_range(t_tmp_cand_list,
@@ -1025,11 +1190,19 @@ def ljc_main(common_data_dir,
                             # check_t = 1
                 # link prob
                 if 'l' in opt_info.mod:
-                    l_tmp_cand_list = []
-                    lp_cand_list = lp.check_link_prob(opt_info.link_prob_min, mention_info, log_info, **d_link_prob)
+                    lp_cand_list = []
+                    if 'n' in opt_info.filtering and 'l' in opt_info.nil_tgt:
+                        # nil detection
+                        dn_res = dn.estimate_nil(cat_attr, mention_info, opt_info, log_info, **d_linkable)
+                        if not dn_res:
+                            lp_cand_list = lp.check_link_prob(opt_info.link_prob_min, mention_info, log_info,
+                                                              **d_link_prob)
+                    else:
+                        lp_cand_list = lp.check_link_prob(opt_info.link_prob_min, mention_info, log_info,
+                                                          **d_link_prob)
 
                     # filtering
-                    if lp_cand_list:
+                    if len(lp_cand_list) > 0:
                         l_tmp_cand_list = copy.deepcopy(lp_cand_list)
                         if 'a' in opt_info.filtering and 'l' in opt_info.attr_range_tgt:
                             lp_cand_list_attr_checked = ar.filter_by_attr_range(l_tmp_cand_list,

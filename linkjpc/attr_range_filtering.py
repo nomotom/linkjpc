@@ -128,14 +128,15 @@ def filter_by_attr_range(module_cand_list, mention_info, opt_info, log_info, **d
             new_val = attr_co * val
             new_module_cand_list.append([pid, mod, new_val])
 
-    new_module_cand_list.sort(key=lambda x: x[2], reverse=True)
+    if len(new_module_cand_list) > 0:
+        new_module_cand_list.sort(key=lambda x: x[2], reverse=True)
 
-    if new_module_cand_list[0][2] > 1.0:
-        logger.error({
-            'action': 'filter_by_attr_range',
-            'error': 'score max is more than 0'
-        })
-        sys.exit()
+        if new_module_cand_list[0][2] > 1.0:
+            logger.error({
+                'action': 'filter_by_attr_range',
+                'error': 'score max is more than 0'
+            })
+            sys.exit()
     return new_module_cand_list
 
 

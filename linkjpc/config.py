@@ -33,6 +33,8 @@ class OptInfo(object):
     score_type_default = 'id'
     mod_default = 'n'
     pre_matching_default = 'n'
+
+
     # mint/tinm
     mint_default = 'n'
     tinm_default = 'n'
@@ -85,6 +87,13 @@ class OptInfo(object):
     incl_tgt_default = 'n'
     incl_type_default = 'n'
     incl_max_default = 1
+    # detect nil
+    nil_tgt_default = 'n'
+    nil_cat_attr_max_default = 0.2
+    len_desc_text_min_default = 7
+    nil_cond_default = 'and_prob_or_len_desc'
+    nil_desc_exception_default = 'person_works'
+    nil_desc_exception_def = {'person_works':'Person:作品', 'company_trade_names':'Company:商品名'}
 
     def __init__(self,
                  ans_max=ans_max_default,
@@ -102,11 +111,16 @@ class OptInfo(object):
                  char_match_cand_num_max=char_match_cand_num_max_default,
                  char_match_min=char_match_min_default,
                  filtering=filtering_default,
+                 len_desc_text_min=len_desc_text_min_default,
                  lp_min=lp_min_default,
                  mint=mint_default,
                  mint_min=mint_min_default,
                  mod=mod_default,
                  mod_w=mod_w_default,
+                 nil_cat_attr_max=nil_cat_attr_max_default,
+                 nil_cond=nil_cond_default,
+                 nil_desc_exception=nil_desc_exception_default,
+                 nil_target=nil_tgt_default,
                  score_type=score_type_default,
                  slink_min=slink_min_default,
                  slink_prob=slink_prob_default,
@@ -144,11 +158,16 @@ class OptInfo(object):
         self.incoming_link_tgt = incl_tgt
         self.incoming_link_type = incl_type
         self.filtering = filtering
+        self.len_desc_text_min = len_desc_text_min
         self.link_prob_min = lp_min
         self.mention_in_title = mint
         self.mention_in_title_min = mint_min
         self.mod = mod
         self.mod_w = mod_w
+        self.nil_cat_attr_max = nil_cat_attr_max
+        self.nil_cond = nil_cond
+        self.nil_desc_exception = nil_desc_exception
+        self.nil_target = nil_target
         self.score_type = score_type
         self.slink_min = slink_min
         self.slink_prob = slink_prob
@@ -238,6 +257,9 @@ class DataInfo(object):
     # [CP9]
     f_link_prob_default = 'sample_cat_att_mention_linkcand.tsv'
     #
+    # [CP10]
+    f_linkable_info_default = 'cat_att_linkable.tsv'
+    #
     # (2-3) tmp_data_dir
     # [TP1]
     f_input_title_default = 'input_title.txt'
@@ -286,6 +308,7 @@ class DataInfo(object):
                  f_common_html_info=f_common_html_info_default,
                  f_html_info=f_html_info_default,
                  f_input_title=f_input_title_default,
+                 f_linkable_info=f_linkable_info_default,
                  f_mention_gold_link_dist_info=f_mention_gold_link_dist_info_default,
                  f_mention_gold_link_dist=f_mention_gold_link_dist_default,
                  f_mint_partial=f_mint_partial_default,
@@ -311,6 +334,7 @@ class DataInfo(object):
         self.enew_org_file = common_data_dir + f_enew_org
         self.enew_mod_list_file = common_data_dir + f_enew_mod_list
         self.link_prob_file = common_data_dir + f_link_prob
+        self.linkable_info_file = common_data_dir + f_linkable_info
         self.mention_gold_link_dist_info_file = common_data_dir + f_mention_gold_link_dist_info
         self.mention_gold_link_dist_file = common_data_dir + f_mention_gold_link_dist
         self.redirect_info_file = common_data_dir + f_redirect_info

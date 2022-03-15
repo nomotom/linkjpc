@@ -25,6 +25,7 @@ def set_logging_pre(log_info, logger_name):
 @click.argument('tmp_data_dir', type=click.Path(exists=True))
 @click.argument('in_dir', type=click.Path(exists=True))
 @click.argument('sample_gold_dir', type=click.Path(exists=True))
+@click.argument('sample_input_dir', type=click.Path(exists=True))
 @click.option('--gen_sample_gold_tsv', is_flag=True, default=False, show_default=True)
 @click.option('--gen_redirect', is_flag=True, default=False, show_default=True)
 @click.option('--pre_matching', type=click.Choice(['mint', 'tinm', 'n']), default=cf.OptInfo.pre_matching_default,
@@ -38,6 +39,7 @@ def set_logging_pre(log_info, logger_name):
 @click.option('--gen_html', is_flag=True, default=False, show_default=True)
 @click.option('--gen_common_html', is_flag=True, default=False, show_default=True)
 @click.option('--gen_link_prob', is_flag=True, default=False, show_default=True)
+@click.option('--gen_linkable', is_flag=True, default=False, show_default=True)
 @click.option('--gen_slink', is_flag=True, default=False, show_default=True)
 @click.option('--gen_back_link', is_flag=True, default=False, show_default=True)
 @click.option('--gen_link_dist', is_flag=True, default=False, show_default=True)
@@ -77,6 +79,9 @@ def set_logging_pre(log_info, logger_name):
               help='f_incoming')
 @click.option('--f_link_prob', default=cf.DataInfo.f_link_prob_default, show_default=True, type=click.STRING,
               help='f_link_prob')
+@click.option('--f_linkable_info', type=click.STRING,
+              default=cf.DataInfo.f_linkable_info_default, show_default=True,
+              help='filename of linkable ratio info file.')
 @click.option('--f_slink', default=cf.DataInfo.f_slink_default, show_default=True, type=click.STRING,
               help='f_slink')
 @click.option('--f_input_title', default=cf.DataInfo.f_input_title_default, show_default=True, type=click.STRING,
@@ -91,11 +96,13 @@ def ljc_prep_main(common_data_dir,
                   tmp_data_dir,
                   in_dir,
                   sample_gold_dir,
+                  sample_input_dir,
                   char_match_min,
                   gen_back_link,
                   gen_common_html,
                   gen_html,
                   gen_incoming_link,
+                  gen_linkable,
                   gen_link_dist,
                   gen_link_prob,
                   gen_slink,
@@ -117,6 +124,7 @@ def ljc_prep_main(common_data_dir,
                   f_html_info,
                   f_incoming,
                   f_input_title,
+                  f_linkable_info,
                   f_link_prob,
                   f_mention_gold_link_dist,
                   f_mint_partial,
@@ -133,6 +141,7 @@ def ljc_prep_main(common_data_dir,
                      prep_tmp_data_dir,
                      prep_in_dir,
                      prep_sample_gold_dir,
+                     prep_sample_input_dir,
                      prep_f_back_link=f_back_link,
                      prep_f_back_link_dump=f_back_link_dump,
                      prep_f_cirrus_content=f_cirrus_content,
@@ -145,6 +154,7 @@ def ljc_prep_main(common_data_dir,
                      prep_f_html_info=f_html_info,
                      prep_f_incoming=f_incoming,
                      prep_f_input_title=f_input_title,
+                     prep_f_linkable=f_linkable_info,
                      prep_f_link_prob=f_link_prob,
                      prep_f_mention_gold_link_dist=f_mention_gold_link_dist,
                      prep_f_mint_partial=f_mint_partial,
@@ -159,6 +169,7 @@ def ljc_prep_main(common_data_dir,
             self.tmp_data_dir = prep_tmp_data_dir
             self.in_dir = prep_in_dir
             self.sample_gold_dir = prep_sample_gold_dir
+            self.sample_input_dir = prep_sample_input_dir
             self.back_link_file = prep_tmp_data_dir + prep_f_back_link
             self.back_link_dump_file = prep_common_data_dir + prep_f_back_link_dump
             self.cirrus_content_file = prep_common_data_dir + prep_f_cirrus_content
@@ -169,6 +180,7 @@ def ljc_prep_main(common_data_dir,
             self.enew_org_file = prep_common_data_dir + prep_f_enew_org
             self.common_html_info_file = prep_common_data_dir + prep_f_common_html_info
             self.incoming_file = prep_common_data_dir + prep_f_incoming
+            self.linkable_file = prep_common_data_dir + prep_f_linkable
             self.link_prob_file = prep_common_data_dir + prep_f_link_prob
             self.mention_gold_link_dist_file = prep_common_data_dir + prep_f_mention_gold_link_dist
             self.title2pid_ext_file = prep_common_data_dir + prep_f_title2pid_ext
@@ -186,7 +198,7 @@ def ljc_prep_main(common_data_dir,
     logger = set_logging_pre(log_info, 'myPreLogger')
     logger.setLevel(logging.INFO)
 
-    data_info_prep = DataInfoPrep(common_data_dir, tmp_data_dir, in_dir, sample_gold_dir)
+    data_info_prep = DataInfoPrep(common_data_dir, tmp_data_dir, in_dir, sample_gold_dir, sample_input_dir)
 
     # common_data_dir
     data_info_prep.back_link_dump_file = data_info_prep.common_data_dir + f_back_link_dump
@@ -198,6 +210,7 @@ def ljc_prep_main(common_data_dir,
     data_info_prep.enew_mod_list_file = data_info_prep.common_data_dir + f_enew_mod_list
     data_info_prep.common_html_info_file = data_info_prep.common_data_dir + f_common_html_info
     data_info_prep.incoming_file = data_info_prep.common_data_dir + f_incoming
+    data_info_prep.linkable_file = data_info_prep.common_data_dir + f_linkable_info
     data_info_prep.link_prob_file = data_info_prep.common_data_dir + f_link_prob
     data_info_prep.mention_gold_link_dist_file = data_info_prep.common_data_dir + f_mention_gold_link_dist
     data_info_prep.title2pid_ext_file = data_info_prep.common_data_dir + f_title2pid_ext
@@ -227,6 +240,7 @@ def ljc_prep_main(common_data_dir,
         'tmp_data_dir': tmp_data_dir,
         'in_dir': in_dir,
         'sample_gold_dir': sample_gold_dir,
+        'sample_input_dir': sample_input_dir
     })
 
     if gen_sample_gold_tsv:
@@ -387,6 +401,17 @@ def ljc_prep_main(common_data_dir,
             'slink_file': data_info_prep.slink_file
         })
         gen_self_link_info(data_info_prep.sample_gold_dir, data_info_prep.slink_file, log_info)
+
+    if gen_linkable:
+        logger.info({
+            'action': 'ljc_prep_main',
+            'run': 'gen_linkable',
+            'sample_input_dir': data_info_prep.sample_input_dir,
+            'sample_gold_dir': data_info_prep.sample_gold_dir,
+            'linkable_file': data_info_prep.linkable_file
+        })
+        gen_linkable_info(data_info_prep.sample_input_dir, data_info_prep.sample_gold_dir, data_info_prep.linkable_file,
+                          log_info)
 
 
 def gen_input_title_file(in_dir, input_title_file, log_info):
@@ -937,6 +962,100 @@ def check_self(row, log_info):
     else:
         return 0
 
+def gen_linkable_info(sample_e_dir, sample_g_dir, linkable_info_file, log_info):
+    """Generate linkable info
+    args:
+        sample_in_dir
+        sample_gold_dir
+        linkable_info_file:
+        log_info:
+    return:
+    output:
+        linkable_info_file
+    Note:
+        gold file
+            Gold files (eg. sample gold files) used for linkable estimation should be located in gold_dir.
+            sample
+                3623607	下半山村	合併市区町村	三間ノ川村	61	39	61	44	29489	高岡郡
+                3623607	下半山村	合併市区町村	三間ノ川村	61	39	61	44	3623607	下半山村
+    """
+    import logging
+
+    import pandas as pd
+    import re
+    logger = set_logging_pre(log_info, 'myPreLogger')
+    logger.setLevel(logging.INFO)
+    logger.info({
+        'action': 'ljc_prep_main',
+        'start': 'gen_linkable_info',
+        'sample_dir': sample_e_dir,
+        'gold_dir': sample_g_dir,
+        'linkable_info_file': linkable_info_file
+    })
+    prt_list = []
+
+    ene = sample_e_dir + '*.json'
+    gold = sample_g_dir + '*.json'
+
+    count_e_cat_attr = {}
+    count_g_cat_attr = {}
+
+    for ene_file in glob(ene):
+        with open(ene_file, mode='r', encoding='utf-8') as ef:
+            e_fname = ene_file.replace(sample_e_dir, '')
+            e_cat = e_fname.replace('.json', '')
+
+            logger.info({
+                'action': 'ljc_main',
+                'ene_cat': e_cat,
+                'e_fname': e_fname,
+            })
+
+            for e_line in ef:
+                erec = json.loads(e_line)
+                e_attr = erec['attribute']
+
+                e_cat_attr = e_cat + ':' + e_attr
+
+                if not count_e_cat_attr.get(e_cat_attr):
+                    count_e_cat_attr[e_cat_attr] = 1
+                else:
+                    count_e_cat_attr[e_cat_attr] += 1
+
+    for g_file in glob(gold):
+        with open(g_file, mode='r', encoding='utf-8') as gf:
+            g_fname = g_file.replace(sample_g_dir, '')
+            g_cat = g_fname.replace('.json', '')
+
+            logger.info({
+                'action': 'ljc_main',
+                'g_cat': g_cat,
+                'g_fname': g_fname,
+            })
+
+            for g_line in gf:
+                grec = json.loads(g_line)
+                g_attr = grec['attribute']
+
+                g_cat_attr = g_cat + ':' + g_attr
+
+                if not count_g_cat_attr.get(g_cat_attr):
+                    count_g_cat_attr[g_cat_attr] = 1
+                else:
+                    count_g_cat_attr[g_cat_attr] += 1
+
+    for cat_attr in count_e_cat_attr:
+        (t_cat, t_attr) = re.split(':', cat_attr)
+        if count_g_cat_attr.get(cat_attr):
+            t_ratio_str = count_g_cat_attr[cat_attr]/count_e_cat_attr[cat_attr]
+            t_ratio = float(Decimal(t_ratio_str).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP))
+        else:
+            t_ratio = 0.0
+
+        prt_list.append([t_cat, t_attr, t_ratio])
+
+    sdf = pd.DataFrame(prt_list, columns=['cat', 'attr', 'ratio'])
+    sdf.to_csv(linkable_info_file, sep='\t', header=False, index=False)
 
 def gen_self_link_info(gold_dir, self_link_info_file, log_info):
     """Generate self link info

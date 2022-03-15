@@ -97,5 +97,15 @@ _--f_enew_info_|filename of enew_info_file.|string| |_ENEW_ENEtag_20200427_mod.t
 #### filtering: (bl: back_link)
 option|description| type | value|  default | note
 :-----------------------------------|:-----------------|:---------|:---------|:---------|:---------------
-_--**back_link_tgt**_,<br>_-**bl_tgt**_|target module of back link filtering, specified as the combination of the following characters. <br>_m_: mint,<br>_t_: tinm,<br>_w_: wlink,<br>_s_: slink, <br>_l_: link_prob, <br>_n_: N/A|string| combination of [_m_, _t_, _w_, _s_, _l_] or ['n']|'n'<br>(cf.OptInfo.back_link_tgt_default)|required when back_link is used.
+_--**back_link_tgt**_,<br>_-**bl_tgt**_|target module of back link filtering, specified as the combination of the following characters. <br>_m_: mint,<br>_t_: tinm,<br>_w_: wlink,<br>_s_: slink, <br>_l_: link_prob, <br>_n_: N/A|string| combination of [_m_, _t_, _w_, _s_, _l_] or ['n']|'n'<br>(cf.OptInfo.back_link_tgt_default)|required when back_link is used.| 
 _--back_link_ng_,<br>_-bl_ng_|score for not back link|float| |0.7<br>cf.OptInfo.back_link_ng_default)|  
+
+#### filtering: (dn: nil_detection)
+option|description| type | value|  default | note
+:-----------------------------------|:-----------------|:---------|:---------|:---------|:---------------
+_--**nil_tgt**_,<br>_-n_tgt_|target module of nil detection filtering, specified as the combination of the following characters, 'm: mint, t: tinm, w: wlink, s: slink, l: link_prob, n: N/A'|string|||
+_--nil_cond_,<br>_-n_cond_|how to evaluate nil (unlinkable) for each mention using prob (estimated linkable ratio for category-attribute pairs based on sample data), len(minimum length of mention), and desc (descriptiveness of mentions).<br> _and_prob_len_desc_: judge as nil if all conditions (prob, len, desc) are satisfied. <br>_and_prob_or_len_desc_: judge as nil if prob condition is satisfied and either len condition or desc condition is satisfied. <br>_and_len_or_prob_desc_: judge as nil if len condition is satisfied and either prob condition or desc condition is satisfied.<br> _and_desc_or_prob_len_: judge as nil if desc condition is satisfied and either prob condition or len condition is satisfied.<br> _two_of_prob_len_desc_: judge as nil if at least two of the conditions(prob, len, and desc) are satisfied. |choice|[_and_prob_len_desc_, _and_prob_or_len_desc_, _and_len_or_prob_desc_, _and_desc_or_prob_len_, _two_of_prob_len_desc_]||
+_--nil_desc_exception_,<br>_-n_exc_|a colon-separated exception list of exception of nil -desc- condition. If any of the following is specified, desc condition is not evaluated for the corresponding category attribute pairs. <br>eg. person_works:company_trade_names <br> person_works: (Person:作品) <br>company_trade_names: (Company:商品名). <br> Specify 'n' (N/A) for no exception.|string|||
+_--nil_cat_attr_max_,<br>_-n_max_|maximum ratio of unlinkable category attribute pairs in the sample data. If nil ratio of the category-attribute pair of a mention is less than the ratio, the mention might be judged as unlinkable. (0.1-1.0)|float|(0.1-1.0)||
+_--len_desc_text_min_,<br>_-ld_min_|minimum length of mention text regarded as descriptive.|int||
+_--f_linkable_info_|filename of linkable ratio info file.|string|||

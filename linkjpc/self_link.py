@@ -7,7 +7,7 @@ def estimate_self_link(cat_attr, slink_prob, mention_info, log_info, **d_self_li
 
     Args:
         cat_attr
-        slink_prob (fixed/raw)
+        slink_prob (fixed/raw/mid)
         mention_info
         log_info
         **d_self_link
@@ -55,7 +55,7 @@ def check_slink_info(slink_file, slink_min, log_info):
     """Get 'selflink' category and attribute pairs.
     Args:
         slink_file (str): selflink info file name
-        slink_min(int): minimum ratio to apply 'selflink' to the above category and attribute pair
+        slink_min(float): minimum ratio to apply 'selflink' to the above category and attribute pair
         log_info
 
     Returns:
