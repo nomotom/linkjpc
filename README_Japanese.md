@@ -59,6 +59,7 @@ SHINRA2021-LinkJPはWikipedia記事中の、あるエンティティ(事物)を�
 - **attr_range_filtering.py(ar)** (メンション(属性値)のクラスによるフィルタリング)
 - **incl_filtering.py(il)** (被リンク数によるフィルタリング)
 - **back_link.py(bl)** (被リンクによるフィルタリング)
+- **detect_nil.py(dn)** (nil detection(リンクなしの判定) によるフィルタリング)
 
 #### その他
 - **config.py(cf)** (クラス定義等)
@@ -131,7 +132,7 @@ python: 3.8
 
 ## 今後の課題
 
-- 機械学習 + Hyper parameter tuning　の利用
+- Hyper parameter tuning
 - 開発データ
   - 現在モジュールで使用している統計情報は小規模なサンプルデータ正解に基づいています。
   

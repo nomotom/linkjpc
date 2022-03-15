@@ -133,7 +133,7 @@ python: 3.8
 
 ## UNSOLVED ISSUES
 
-- Machine learning + Hyper parameter tuning
+- Hyper parameter tuning
 - Development data
   - Currently, the statistics used by some modules are based on the small sample data.
 

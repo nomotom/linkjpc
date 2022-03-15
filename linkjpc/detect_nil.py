@@ -4,7 +4,6 @@ import logging
 
 def estimate_nil(cat_attr, mention_info, opt_info, log_info, **d_linkable):
     """Create a list of nil candidates based on nil(unlinkable) cat-attr info, mention length, and mention pattern
-
     Args:
         cat_attr
         mention_info
@@ -145,14 +144,14 @@ def evaluate_descriptiveness(text, log_info):
     # conjunctive_list = ['し、', 'され、']
 
     # demostrative
-    demonstrative_list = ['ここ', 'そこ', 'あそこ', 'どこ', 'この','その', 'あの', 'どの', 'これ', 'それ', 'あの', 'どの']
+    demonstrative_list = ['ここ', 'そこ', 'あそこ', 'どこ', 'この', 'その', 'あの', 'どの', 'これ', 'それ', 'あの', 'どの']
 
     subpat_list = symbol_list + parallel_list + particles_list + relaxing_list + location_list + demonstrative_list
 
     subpat_pat = '|'.join(subpat_list)
 
     # 2)prefix + (num)
-    prefix_list = ['約[0-9零一二三四五六七八九十百千万億兆]','およそ']
+    prefix_list = ['約[0-9零一二三四五六七八九十百千万億兆]', 'およそ']
     prefix_pat = '|'.join(prefix_list)
 
     # 3)(num) + suffix

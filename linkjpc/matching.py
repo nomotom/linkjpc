@@ -25,7 +25,7 @@ def match_mention_title(mod, opt_info, mention, log_info, **d_mention_pid_ratio)
     logger.setLevel(logging.INFO)
 
     match_type = ''
-    char_mach_min = 0
+    char_match_min = 0
     if mod == 'm':
         match_type = opt_info.mention_in_title
         char_match_min = opt_info.mention_in_title_min

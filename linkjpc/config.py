@@ -34,7 +34,6 @@ class OptInfo(object):
     mod_default = 'n'
     pre_matching_default = 'n'
 
-
     # mint/tinm
     mint_default = 'n'
     tinm_default = 'n'

@@ -962,6 +962,7 @@ def check_self(row, log_info):
     else:
         return 0
 
+
 def gen_linkable_info(sample_e_dir, sample_g_dir, linkable_info_file, log_info):
     """Generate linkable info
     args:

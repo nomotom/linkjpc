@@ -90,7 +90,6 @@ python $script $common_data_dir $tmp_data_dir $in_dir ${out_dir_base}slink_05_mi
 #   - nil condition: two_of_prob_len_desc (judge as nil if at least two of the conditions(prob, len, and desc))
 #   - nil condition(len) minimum: (7)
 
-
 ## EXAMPLE (baseline: partial match + incoming link filtering)
 python $script $common_data_dir $tmp_data_dir $in_dir ${out_dir_base}mint_p_incl_m_imax1_o/ --mod m -f i --mint p -i_tgt m -i_max 1 -i_type o
 #

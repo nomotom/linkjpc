@@ -13,7 +13,7 @@ def estimate_self_link(cat_attr, slink_prob, mention_info, log_info, **d_self_li
         **d_self_link
     Returns:
         slink_cand_list
-            format: [(pid, mod, ratio)]
+            format: [(pid, mod, score)]
     Note:
         selflink info file
             format: (cat(\t)att(\t)selflink ratio)

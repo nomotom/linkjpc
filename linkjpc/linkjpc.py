@@ -289,7 +289,6 @@ def set_logging(log_info, logger_name):
 @click.option('--f_linkable_info', type=click.STRING,
               default=cf.DataInfo.f_linkable_info_default, show_default=True,
               help='filename of linkable ratio info file.')
-
 # ljc_main
 def ljc_main(common_data_dir,
              tmp_data_dir,
@@ -938,24 +937,24 @@ def ljc_main(common_data_dir,
             })
             sys.exit()
         elif opt_info.nil_desc_exception != 'n':
-            if not '_' in opt_info.nil_desc_exception:
+            if '_' not in opt_info.nil_desc_exception:
                 logger.error({
                     'action': 'ljc_main',
                     'illegal nil_desc_exception': 'nil detection is specified, but illegal nil_desc_exception'
                 })
                 sys.exit()
         elif opt_info.nil_cat_attr_max > 1.0:
-                logger.error({
-                    'action': 'ljc_main',
-                    'illegal nil_cat_attr_max': 'nil detection is specified, but illegal nil_cat_attr_max'
-                })
-                sys.exit()
+            logger.error({
+                'action': 'ljc_main',
+                'illegal nil_cat_attr_max': 'nil detection is specified, but illegal nil_cat_attr_max'
+            })
+            sys.exit()
         elif opt_info.len_desc_text_min < 0:
-                logger.error({
-                    'action': 'ljc_main',
-                    'illegal len_desc_text_min': 'nil detection is specified, but illegal len_desc_text_min'
-                })
-                sys.exit()
+            logger.error({
+                'action': 'ljc_main',
+                'illegal len_desc_text_min': 'nil detection is specified, but illegal len_desc_text_min'
+            })
+            sys.exit()
 
         else:
             logger.info({
@@ -1059,8 +1058,8 @@ def ljc_main(common_data_dir,
                         # nil detection
                         dn_res = dn.estimate_nil(cat_attr, mention_info, opt_info, log_info, **d_linkable)
                         if not dn_res:
-                            slink_cand_list = sl.estimate_self_link(cat_attr, opt_info.slink_prob, mention_info, log_info,
-                                                                    **d_self_link)
+                            slink_cand_list = sl.estimate_self_link(cat_attr, opt_info.slink_prob, mention_info,
+                                                                    log_info, **d_self_link)
                     else:
                         slink_cand_list = sl.estimate_self_link(cat_attr, opt_info.slink_prob, mention_info, log_info,
                                                                 **d_self_link)

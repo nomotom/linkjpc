@@ -163,7 +163,6 @@ def get_attr_range(attr_range_file, opt_info, log_info):
                 attr: attribute_name
          (sample)
             {'City__国': [['1.5.1.0', 1.0], ['1.5.1.3',0.5], 'Airport__国': [['1.5.1.0', 1.0], ['1.5.1.3', 0.5]], ....}
-
     """
     import re
     import csv
